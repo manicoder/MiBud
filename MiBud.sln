@@ -17,9 +17,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APDiagnosticsAndroid24", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APDongleCommAndroid", "APDongleCommAndroid\APDongleCommAndroid.csproj", "{C2A65B08-0C89-4309-B73E-B3BF5E72AEEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECUSeedkeyPCL", "ECUSeedkeyPCL\ECUSeedkeyPCL.csproj", "{1B99F7E2-71C5-4727-B1FD-C79AB0CDF9DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECUSeedkeyPCL", "ECUSeedkeyPCL\ECUSeedkeyPCL.csproj", "{1B99F7E2-71C5-4727-B1FD-C79AB0CDF9DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoELM327", "AutoELM327\AutoELM327.csproj", "{CD12EA84-6D71-4BAD-A1E1-4BA02F1FBF6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoELM327", "AutoELM327\AutoELM327.csproj", "{CD12EA84-6D71-4BAD-A1E1-4BA02F1FBF6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLLs", "DLLs", "{F2BCDA3C-3DBC-4C7E-AB02-B8EFED648159}"
+	ProjectSection(SolutionItems) = preProject
+		DLL\Android.UsbSerial.dll = DLL\Android.UsbSerial.dll
+		DLL\Mono.Android.dll = DLL\Mono.Android.dll
+		DLL\Mono.Android.Export.dll = DLL\Mono.Android.Export.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
