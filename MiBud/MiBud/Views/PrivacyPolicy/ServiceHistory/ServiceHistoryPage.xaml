@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MiBud.Views.ServiceHistory.ServiceHistoryPage"
+             Title="Service History"
+             BackgroundColor="{StaticResource page_bg_color}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="img_connected_vehicle" IconImageSource="ic_connected_vehicle" Order="Primary" Priority="0"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid Padding="10">
+            <CollectionView ItemsSource="{Binding service_history_list}" SelectionMode="Single" 
+                            SelectedItem="{Binding selected_service, Mode=TwoWay}" ItemSizingStrategy="MeasureAllItems">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                </CollectionView.ItemsLayout>
+                <!--<CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="4"
+                                             VerticalItemSpacing="20" HorizontalItemSpacing="30" />
+                        </CollectionView.ItemsLayout>-->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="0" Style="{StaticResource col_grid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid RowSpacing="0" Padding="0,10,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Frame Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="60"
+                                       Padding="0" BorderColor="#ffffff" BackgroundColor="Transparent">
+                                    <Image Grid.Row="0" VerticalOptions="CenterAndExpand" >
+                                        <Image.Source>
+                                            <FontImageSource FontFamily="{DynamicResource Material}" Glyph="&#xF0013;" 
+                                             Color="{StaticResource theme_color}" Size="70" />
+                                        </Image.Source>
+                                    </Image>
+                                </Frame>
+                                <Grid Grid.Row="0" Grid.Column="1" RowSpacing="0" ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding jobcard_no}" Style="{StaticResource lbl}" VerticalTextAlignment="End"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding date}" Style="{StaticResource lbl}" VerticalTextAlignment="Start"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding inr}" Style="{StaticResource lbl}" VerticalTextAlignment="End"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding status}" Style="{StaticResource lbl}" VerticalTextAlignment="Start"/>
+                                </Grid>
+                            </Grid>
+                            <BoxView Grid.Row="1" BackgroundColor="{StaticResource theme_color}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label Text="No jobcard found." FontAttributes="Bold" FontSize="18"
+                               TextColor="{StaticResource text_color}" VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                    </Grid>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,43 @@
+﻿{
+  "count": 4,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "oem": {
+        "id": 2,
+        "name": "another-oem",
+        "slug": "another-oem"
+      },
+      "id": 5,
+      "name": "new model"
+    },
+    {
+      "oem": {
+        "id": 2,
+        "name": "another-oem",
+        "slug": "another-oem"
+      },
+      "id": 4,
+      "name": "another-model"
+    },
+    {
+      "oem": {
+        "id": 1,
+        "name": "Test OEM",
+        "slug": "test-oem"
+      },
+      "id": 3,
+      "name": "test sub model"
+    },
+    {
+      "oem": {
+        "id": 1,
+        "name": "Test OEM",
+        "slug": "test-oem"
+      },
+      "id": 2,
+      "name": "test sub model"
+    }
+  ]
+}

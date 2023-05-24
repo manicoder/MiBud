@@ -1,0 +1,131 @@
+﻿
+Calculate = 6*0 : 0
+
+Calculate = 6*1.001 : 6.006001
+
+Calculate = 6*2.001 : 12.006
+
+Calculate = 6*3.016 : 18.096
+
+Calculate = 6*4 : 24
+
+Calculate = 6*5.001 : 30.006
+
+Calculate = 6*6 : 36
+
+Calculate = 6*7.002 : 42.012
+
+Calculate = 6*8 : 48
+
+Calculate = 6*9 : 54
+
+Calculate = 6*10.017 : 60.102
+
+
+Calculate = 6*11 : 66
+
+Calculate = 6*12 : 72
+
+Calculate = 6*13.002 : 78.012
+
+Calculate = 6*14.001 : 84.006
+
+Calculate = 6*15.017 : 90.10201
+
+Calculate = 6*15.935 : 95.61
+
+
+Calculate = 6*16 : 96
+
+
+Calculate = 6*17.035 : 102.21
+
+Calculate = 6*17.984 : 107.904
+
+Calculate = 6*18.002 : 108.012
+
+Calculate = 6*19.016 : 114.096
+
+Calculate = 6*20 : 120
+
+Calculate = 6*21 : 126
+
+Calculate = 6*22 : 132
+
+Calculate = 6*23.018 : 138.108
+
+Calculate = 6*24 : 144
+
+Calculate = 6*25.017 : 150.102
+
+Calculate = 6*26.001 : 156.006
+
+Calculate = 6*27.016 : 162.096
+
+Calculate = 6*28.017 : 168.102
+
+Calculate = 6*29 : 174
+
+Calculate = 6*30 : 180
+
+Calculate = 6*31 : 186
+
+
+Calculate = 6*32.017 : 192.102
+
+Calculate = 6*33.051 : 198.306
+
+Calculate = 6*34 : 204
+
+Calculate = 6*35 : 210
+
+Calculate = 6*36.033 : 216.198
+
+Calculate = 6*37 : 222
+
+Calculate = 6*38 : 228
+
+Calculate = 6*39 : 234
+
+Calculate = 6*40.016 : 240.096
+
+Calculate = 6*41.049 : 246.294
+
+Calculate = 6*42.032 : 252.192
+
+
+Calculate = 6*43 : 258
+
+Calculate = 6*44 : 264
+
+Calculate = 6*45.016 : 270.096
+
+
+Calculate = 6*46 : 276
+
+Calculate = 6*47.033 : 282.198
+
+Calculate = 6*48.016 : 288.096
+
+Calculate = 6*49 : 294
+
+Calculate = 6*50.016 : 300.096
+
+Calculate = 6*51.05 : 306.3
+
+Calculate = 6*52.002 : 312.012
+
+Calculate = 6*53.002 : 318.012
+
+Calculate = 6*54 : 324
+
+Calculate = 6*55.016 : 330.096
+
+Calculate = 6*56.001 : 336.006
+
+Calculate = 6*57.002 : 342.012
+
+Calculate = 6*58.016 : 348.096
+
+Calculate = 6*59.001 : 354.006
+

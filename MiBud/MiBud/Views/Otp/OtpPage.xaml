@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MiBud.Views.Otp.OtpPage"
+             xmlns:local="clr-namespace:MiBud.CustomControls"
+             NavigationPage.HasNavigationBar="False"             
+             BackgroundColor="{StaticResource theme_color}">
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="frame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="BorderColor" Value="{StaticResource theme_color}" />
+                <Setter Property="Padding" Value="10,0,10,0" />
+            </Style>
+            <Style x:Key="ent" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="{StaticResource placeholder_color}" />
+                <Setter Property="TextColor" Value="{StaticResource text_color}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="{StaticResource font_size}" />
+            </Style>
+            <Style x:Key="editor" TargetType="Editor">
+                <Setter Property="PlaceholderColor" Value="{StaticResource placeholder_color}" />
+                <Setter Property="TextColor" Value="{StaticResource text_color}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="{StaticResource font_size}" />
+            </Style>
+            <Style x:Key="lbl" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource btn_text_color}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="{StaticResource font_size}" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="btn" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource theme_color}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="27" />
+                <Setter Property="BackgroundColor" Value="{StaticResource btn_text_color}" />
+                <Setter Property="FontSize" Value="{StaticResource font_size}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+    <ContentPage.Content>
+        <Grid RowSpacing="10" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" RowSpacing="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="115" Phone="90"/>
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="70" Phone="43"/>
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Text="{Binding otp}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                       FontSize="22" TextColor="{StaticResource btn_text_color}" FontAttributes="Bold"/>
+                <Image Grid.Row="1" Source="ic_splash" />
+                <Label Grid.Row="2" Text="{Binding description}" Style="{StaticResource lbl}" 
+                       TextColor="{StaticResource btn_text_color}" HorizontalTextAlignment="Center"/>
+                <Grid Grid.Row="4" ColumnSpacing="8" IsVisible="{Binding otp_visible}"
+                      HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition>
+                            <ColumnDefinition.Width>
+                                <OnIdiom x:TypeArguments="GridLength" Tablet="70" Phone="43"/>
+                            </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition>
+                            <ColumnDefinition.Width>
+                                <OnIdiom x:TypeArguments="GridLength" Tablet="70" Phone="43"/>
+                            </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition>
+                            <ColumnDefinition.Width>
+                                <OnIdiom x:TypeArguments="GridLength" Tablet="70" Phone="43"/>
+                            </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition>
+                            <ColumnDefinition.Width>
+                                <OnIdiom x:TypeArguments="GridLength" Tablet="70" Phone="43"/>
+                            </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition>
+                            <ColumnDefinition.Width>
+                                <OnIdiom x:TypeArguments="GridLength" Tablet="70" Phone="43"/>
+                            </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition>
+                            <ColumnDefinition.Width>
+                                <OnIdiom x:TypeArguments="GridLength" Tablet="70" Phone="43"/>
+                            </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1" BackgroundColor="{StaticResource page_bg_color}">
+                        <local:CustomEntry x:Name="FirstDigit" Text="{Binding otpFirstDigit}" 
+                                           HorizontalTextAlignment="Center" MaxLength="1"
+                                           TextChanged="FirstDigit_TextChanged"/>
+                    </Grid>
+                    <Grid Grid.Column="2" BackgroundColor="{StaticResource page_bg_color}">
+                        <local:CustomEntry x:Name="SecondDigit" Text="{Binding otpSecondDigit}" 
+                                           HorizontalTextAlignment="Center" MaxLength="1"
+                                           TextChanged="SecondDigit_TextChanged"/>
+                    </Grid>
+                    <Grid Grid.Column="3" BackgroundColor="{StaticResource page_bg_color}">
+                        <local:CustomEntry x:Name="ThirdDigit" Text="{Binding otpThirdDigit}" 
+                                           HorizontalTextAlignment="Center" MaxLength="1"
+                                           TextChanged="ThirdDigit_TextChanged"/>
+                    </Grid>
+                    <Grid Grid.Column="4" BackgroundColor="{StaticResource page_bg_color}">
+                        <local:CustomEntry x:Name="FourthDigit" Text="{Binding otpFourthDigit}" 
+                                           HorizontalTextAlignment="Center" MaxLength="1"
+                                           TextChanged="FourthDigit_TextChanged"/>
+                    </Grid>
+                    <Grid Grid.Column="5" BackgroundColor="{StaticResource page_bg_color}">
+                        <local:CustomEntry x:Name="FifthDigit" Text="{Binding otpFifthDigit}" 
+                                           HorizontalTextAlignment="Center" MaxLength="1"
+                                           TextChanged="FifthDigit_TextChanged"/>
+                    </Grid>
+                    <Grid Grid.Column="6" BackgroundColor="{StaticResource page_bg_color}">
+                        <local:CustomEntry x:Name="SixthDigit" Text="{Binding otpSixthDigit}" 
+                                           HorizontalTextAlignment="Center" MaxLength="1"
+                                           TextChanged="SixthDigit_TextChanged"/>
+                    </Grid>
+                </Grid>
+                <Frame Grid.Row="4" 
+                       Style="{StaticResource frame}"
+                       IsVisible="{Binding email_visible}"
+                       HorizontalOptions="CenterAndExpand"
+                       BorderColor="{StaticResource btn_text_color}">
+                    <local:CustomEntry Text="{Binding email}" 
+                                       Placeholder="Enter Registered Mobile" 
+                                       Style="{StaticResource ent}"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource btn_text_color}"/>
+
+                </Frame>
+            </Grid>
+            <Grid Grid.Row="1" x:Name="term_codition_grid" IsVisible="{Binding termcondition_visible}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Color="{StaticResource btn_text_color}" Scale="1.3"/>
+                <Label Grid.Column="1" LineBreakMode="WordWrap" Style="{StaticResource lbl}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="I agree with the "/>
+                            <Span Text="Terms and conditions" FontAttributes="Bold" TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TermConditionCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=" and " />
+                            <Span Text="Privacy policy" FontAttributes="Bold" TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PrivacyPolicyCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=" of MiBud mechanik" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+            <Button Grid.Row="2" 
+                    Text="Submit" 
+                    Style="{StaticResource btn}" 
+                    BorderColor="{StaticResource btn_text_color}" 
+                    BorderWidth="2" 
+                    Command="{Binding SubmitCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

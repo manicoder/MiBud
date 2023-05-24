@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiBud.Views.AddAddress.AddAddressPage"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+            <Grid HorizontalOptions="FillAndExpand">
+                <maps:Map x:Name="map" 
+                          IsVisible="True"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          PropertyChanged="map_PropertyChanged"
+                          PropertyChanging="map_PropertyChanging"/>
+                <Image Source="ic_pin.png" 
+                       HeightRequest="40" 
+                       WidthRequest="40"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TranslationY="-20"/>
+            </Grid>
+            <StackLayout Grid.Row="1" 
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="10">
+                <Editor x:Name="txtAddress"
+                        Placeholder="Enter address"
+                        HeightRequest="100"/>
+            </StackLayout>
+            <Button Grid.Row="2"
+                    Text="Add"
+                    BackgroundColor="{StaticResource theme_color}"
+                    Clicked="AddAddressClicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

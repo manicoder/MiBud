@@ -1,0 +1,14 @@
+﻿{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "name": "test Model",
+            "segment_name": null,
+            "model_year": null,
+            "oem": "Test OEM"
+        }
+    ]
+}

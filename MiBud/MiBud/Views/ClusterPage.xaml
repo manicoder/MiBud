@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiBud.Views.ClusterPage"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             SizeChanged="ContentPage_SizeChanged">
+    <ContentPage.Content>
+        <Grid RowDefinitions="50,*">
+            <Grid ColumnDefinitions="*,50">
+                <Slider Minimum="0" Maximum="10" ValueChanged="Slider_ValueChanged"/>
+                <Label Grid.Column="1" x:Name="txtSpeed"/>
+            </Grid>
+            <skia:SKCanvasView Grid.Row="1" x:Name="canvasView"
+                               PaintSurface="canvasView_PaintSurface" Margin="10"/>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

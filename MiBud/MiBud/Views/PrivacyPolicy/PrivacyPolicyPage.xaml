@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MiBud.Views.PrivacyPolicy.PrivacyPolicyPage"
+             xmlns:local="clr-namespace:MiBud.CustomControls"
+             Title="Privacy Policy"
+             BackgroundColor="{StaticResource page_bg_color}">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:DataType="GridLength" Tablet="55" Phone="45" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Text="This is privacy policy"/>
+            <Button Grid.Row="1" Text="Agreed" Style="{StaticResource btn}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

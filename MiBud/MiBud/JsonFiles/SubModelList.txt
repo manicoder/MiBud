@@ -1,0 +1,28 @@
+﻿{
+    "count": 3,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 4,
+            "name": "another-model",
+            "segment_name": "test segment",
+            "model_year": "2020",
+            "oem": "another-oem"
+        },
+        {
+            "id": 3,
+            "name": "test sub model",
+            "segment_name": "test segment",
+            "model_year": "2018",
+            "oem": "Test OEM"
+        },
+        {
+            "id": 2,
+            "name": "test sub model",
+            "segment_name": "test segment",
+            "model_year": "2018",
+            "oem": "Test OEM"
+        }
+    ]
+}

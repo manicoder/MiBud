@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MiBud.CustomControls"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Class="MiBud.Views.Trips.TripsPage"
+              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             Title="Trips">
+    <ContentPage.Content>
+        <Grid Padding="10" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:DataType="GridLength" Tablet="55" Phone="45" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:DataType="GridLength" Tablet="250" Phone="180" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Column="0" Style="{StaticResource frame}">
+                <Grid>
+                    <Grid ColumnSpacing="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1.5"/>
+                            <ColumnDefinition>
+                                <ColumnDefinition.Width>
+                                    <OnIdiom x:TypeArguments="GridLength" Tablet="50" Phone="40" />
+                                </ColumnDefinition.Width>
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label  Style="{StaticResource lbl}" TextColor="{StaticResource placeholder_color}" />
+                        <BoxView Grid.Column="1" x:Name="img_line_ds" BackgroundColor="{StaticResource theme_color}"/>
+                        <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
+                            </Label.FontSize>
+                        </Label>
+                    </Grid>
+                    <local:CustomDatePicker TextColor="{StaticResource text_color}" FontSize="{StaticResource font_size}"
+                                            Date="{x:Static system:DateTime.Today}"/>
+                </Grid>
+            </Frame>
+            <maps:Map Grid.Row="1" x:Name="map" />
+            <CollectionView Grid.Row="2" ItemsSource="{Binding trip_list}" 
+                                    ItemSizingStrategy="MeasureAllItems">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                </CollectionView.ItemsLayout>
+                <!--<CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="4"
+                                             VerticalItemSpacing="20" HorizontalItemSpacing="30" />
+                        </CollectionView.ItemsLayout>-->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="10" Margin="0,5,0,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding trip_id}" Style="{StaticResource lbl}" />
+                                <Label Grid.Column="1" Text="{Binding kms}" Style="{StaticResource lbl}" HorizontalTextAlignment="End"/>
+                            </Grid>
+                            <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding from_date}" Style="{StaticResource lbl}" />
+                                <Label Grid.Column="1" Text="{Binding to_date}" Style="{StaticResource lbl}" HorizontalTextAlignment="End"/>
+                            </Grid>
+                            <BoxView Grid.Row="2" BackgroundColor="{StaticResource theme_color}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label Text="No jobcard found." FontAttributes="Bold" FontSize="18"
+                               TextColor="{StaticResource text_color}" VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                    </Grid>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

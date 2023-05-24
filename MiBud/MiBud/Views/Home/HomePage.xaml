@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiBud.Views.Home.HomePage"
+             xmlns:converter="clr-namespace:MiBud.Converters"
+             BackgroundColor="{StaticResource page_bg_color}"
+             Title="Dashboard">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ImageSourceConverter x:Key="image_converter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <!--<NavigationPage.TitleView>
+        <Grid ColumnDefinitions="*,42,1" VerticalOptions="FillAndExpand">
+            <Label Text="Dashboard" FontSize="17" TextColor="#FFFFFF" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+            <Frame Grid.Column="1" Padding="0" CornerRadius="20" >
+                <ImageButton BackgroundColor="Transparent"
+                             Aspect="Fill"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             HeightRequest="42"
+                            Source="{Binding selected_vehicle_picture,Converter={StaticResource image_converter}}"/>
+            </Frame>
+
+        </Grid>
+    </NavigationPage.TitleView>-->
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto,*" RowSpacing="0">
+                <Image Source="{Binding selected_vehicle.vehicle_picture,Converter={StaticResource image_converter}}"
+                   HeightRequest="190" Aspect="Fill"/>
+                <Frame Grid.Row="1" HasShadow="True" Margin="1" Padding="10">
+                    <Grid RowDefinitions="Auto,Auto,Auto">
+                        <Label Grid.Row="0" 
+                       Text="{Binding selected_vehicle.registration_id,StringFormat='Registration Number : {0}'}"
+                       Style="{StaticResource lbl}"/>
+                        <Label Grid.Row="1" 
+                       Text="{Binding selected_vehicle.vin,StringFormat='Chassis Number : {0}'}"
+                       Style="{StaticResource lbl}"/>
+                        <Label Grid.Row="2" 
+                       Text="{Binding selected_vehicle.vehicle_model.name,StringFormat='Vehicle Model : {0}'}"
+                       Style="{StaticResource lbl}"/>
+                    </Grid>
+                </Frame>
+                <Grid Grid.Row="2" RowDefinitions="Auto,*" Padding="10" RowSpacing="40" VerticalOptions="CenterAndExpand">
+                    <Grid Grid.Row="0" 
+                          ColumnDefinitions="*,*" 
+                          RowDefinitions="Auto,Auto"
+                          VerticalOptions="CenterAndExpand"
+                          RowSpacing="10"
+                          ColumnSpacing="0">
+                        <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,Auto" RowSpacing="2">
+                            <ImageButton Source="ic_trip" BackgroundColor="{StaticResource theme_color}" 
+                                 HorizontalOptions="Center" 
+                                 VerticalOptions="Center" 
+                                 HeightRequest="60" 
+                                 WidthRequest="60" 
+                                 CornerRadius="50" 
+                                 Padding="15">
+                                <!--<ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" 
+                                             Glyph="&#xF08BB;" 
+                                             Color="{StaticResource btn_text_color}" 
+                                             Size="60"/>
+                        </ImageButton.Source>-->
+                            </ImageButton>
+                            <Label Grid.Row="1" Text="Trips" 
+                                   FontSize="16"
+                               FontAttributes="Bold"
+                           Style="{StaticResource lbl}" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="Auto,Auto" RowSpacing="2">
+                            <ImageButton x:Name="veh_service" Source="ic_veh_service" 
+                                         BackgroundColor="{StaticResource theme_color}" 
+                                         HorizontalOptions="Center" 
+                                         VerticalOptions="Center" 
+                                         HeightRequest="60" 
+                                         WidthRequest="60" 
+                                         CornerRadius="50" 
+                                         Padding="15"
+                                         Command="{Binding VehicleServiceCommand}" CommandParameter="{x:Reference veh_service}">
+                                <!--<ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" 
+                                             Glyph="&#xF08BB;" 
+                                             Color="{StaticResource btn_text_color}" 
+                                             Size="60"/>
+                        </ImageButton.Source>-->
+                            </ImageButton>
+                            <Label Grid.Row="1" Text="Vehicle Service" 
+                           FontSize="17"
+                           Style="{StaticResource lbl}" 
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="Auto,Auto" RowSpacing="2">
+                            <ImageButton Source="ic_daignose" 
+                                 BackgroundColor="{StaticResource theme_color}" 
+                                 HorizontalOptions="Center" 
+                                 VerticalOptions="CenterAndExpand" 
+                                 HeightRequest="60" 
+                                 WidthRequest="60" 
+                                 CornerRadius="50" 
+                                 Padding="15">
+                                <!--<ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" 
+                                             Glyph="&#xF08BB;" 
+                                             Color="{StaticResource btn_text_color}" 
+                                             Size="60"/>
+                        </ImageButton.Source>-->
+                            </ImageButton>
+                            <Label Grid.Row="1" Text="Self Diagnose" 
+                           FontSize="17"
+                           Style="{StaticResource lbl}" 
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="Auto,Auto" RowSpacing="2">
+                            <ImageButton Source="ic_setting" 
+                                 BackgroundColor="{StaticResource theme_color}" 
+                                 HorizontalOptions="CenterAndExpand" 
+                                 VerticalOptions="CenterAndExpand" 
+                                 HeightRequest="60" 
+                                 WidthRequest="60" 
+                                 CornerRadius="50" 
+                                 Padding="15">
+                                <!--<ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" 
+                                             Glyph="&#xF08BB;" 
+                                             Color="{StaticResource btn_text_color}" 
+                                             Size="60"/>
+                        </ImageButton.Source>-->
+                            </ImageButton>
+                            <Label Grid.Row="1" Text="Settings" 
+                           FontSize="16"
+                           Style="{StaticResource lbl}" 
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="1" RowDefinitions="*,Auto" VerticalOptions="EndAndExpand">
+                        <Grid Grid.Row="0" RowDefinitions="*,Auto" RowSpacing="-3">
+                            <ImageButton Source="ic_logout" 
+                                 BackgroundColor="Red" 
+                                 HorizontalOptions="CenterAndExpand" 
+                                 VerticalOptions="EndAndExpand" 
+                                 HeightRequest="45" 
+                                 WidthRequest="45" 
+                                 CornerRadius="40" 
+                                 Padding="12">
+                                <!--<ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" 
+                                             Glyph="&#xF08BB;" 
+                                             Color="{StaticResource btn_text_color}" 
+                                             Size="60"/>
+                        </ImageButton.Source>-->
+                            </ImageButton>
+                            <Label Grid.Row="1" Text="Logout" 
+                           TextColor="Red"
+                           Style="{StaticResource lbl}" 
+                           HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"/>
+                        </Grid>
+                        <Label Grid.Row="1" Text="App Version 1.0" 
+                       FontSize="17"
+                       Style="{StaticResource lbl}" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="End"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

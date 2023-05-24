@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MiBud.Views.SelfDiagnose.SelfDiagnosePage"
+             xmlns:dtc="clr-namespace:MiBud.Views.DtcList"
+             xmlns:lp="clr-namespace:MiBud.Views.LiveParameter"
+             Title="Self Diagnose">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="img_connected_vehicle" IconImageSource="ic_connected_vehicle" Order="Primary" Priority="0"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition >
+                    <RowDefinition.Height>
+                        <OnIdiom x:TypeArguments="GridLength" Tablet="64" Phone="45" Desktop="64"/>
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" x:Name="grd_tab" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                  BackgroundColor="#FFF" ColumnSpacing="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="DtcTab" Grid.Column="0" BackgroundColor="{StaticResource theme_color}" ClassId="dtc" Opacity="1">
+                    <Label Text="DTC" Style="{StaticResource txt_tab}"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TabClicked"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Grid x:Name="LiveParametersTab" Grid.Column="1" BackgroundColor="{StaticResource theme_color}" ClassId="lp" Opacity=".5">
+                    <Label Text="Live Parameters" Style="{StaticResource txt_tab}"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TabClicked"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Grid>
+            <dtc:DtcListPage Grid.Row="1" x:Name="DtcView" IsVisible="True"/>
+            <lp:LiveParameterPage Grid.Row="1" x:Name="LiveParametersView" IsVisible="False"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

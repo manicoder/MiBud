@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiBud.Views.Settings.SettingPage"
+             xmlns:local="clr-namespace:MiBud.CustomControls"
+             Title="Settings"
+             BackgroundColor="{StaticResource page_bg_color}">
+    <ContentPage.Content>
+        <Grid RowSpacing="10" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0" Style="{StaticResource frame}">
+                <local:CustomEntry Text="{Binding first_name}" Placeholder="First name" Style="{StaticResource ent}"/>
+            </Frame>
+            <Frame Grid.Row="1" Style="{StaticResource frame}">
+                <local:CustomEntry Text="{Binding last_name}" Placeholder="Last name" Style="{StaticResource ent}"/>
+            </Frame>
+            <Frame Grid.Row="2" Style="{StaticResource frame}" Padding="20,0,10,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Agent" Style="{StaticResource lbl}"/>
+                    <Label Grid.Column="1" Text="&#xF1100;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                        <Label.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double" Tablet="47" Phone="37"/>
+                        </Label.FontSize>
+                    </Label>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="3" Style="{StaticResource frame}" Padding="20,0,15,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="9800000000" Style="{StaticResource lbl}" TextColor="{StaticResource theme_color}"/>
+                    <Label Grid.Column="1" Text="dipak.yogi@autopeepal.com" Style="{StaticResource lbl}" TextColor="{StaticResource theme_color}"/>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="4" Style="{StaticResource frame}" Padding="15,0,2,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <local:CustomEntry Text="{Binding first_name}" Placeholder="Device" Style="{StaticResource ent}"/>
+                    <ImageButton Grid.Column="1" BackgroundColor="White" Margin="3"
+                                  CornerRadius="23" Command="{Binding AddNewVehicleCommand}">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" Glyph="&#xF0417;" 
+                                             Color="{StaticResource theme_color}">
+                                <FontImageSource.Size>
+                                    <OnIdiom x:TypeArguments="x:Double" Tablet="47" Phone="45"/>
+                                </FontImageSource.Size>
+                            </FontImageSource>
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="5" Style="{StaticResource frame}" Padding="15,0,2,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <local:CustomEntry x:Name="txt_12v" Text="{Binding ld_dongle}" Placeholder="Dongle LD (12V)" Style="{StaticResource ent}"
+                                       IsReadOnly="False"/>
+                    <ImageButton Grid.Column="1" BackgroundColor="White" Margin="3"
+                                 CornerRadius="23" Command="{Binding DogleRegisterCommand}"
+                                 CommandParameter="{Binding Text, Source={x:Reference txt_12v}}">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" Glyph="{Binding ld_button}" 
+                                             Color="{StaticResource theme_color}">
+                                <FontImageSource.Size>
+                                    <OnIdiom x:TypeArguments="x:Double" Tablet="47" Phone="45"/>
+                                </FontImageSource.Size>
+                            </FontImageSource>
+                        </ImageButton.Source>
+                    </ImageButton>
+
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="6" Style="{StaticResource frame}" Padding="15,0,2,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <local:CustomEntry Text="{Binding first_name}" Placeholder="Dongle HD (24V)" Style="{StaticResource ent}"
+                                       IsReadOnly="False"/>
+                    <ImageButton x:Name="txt_24v" Grid.Column="1" BackgroundColor="White" Margin="3"
+                                 CornerRadius="23" Command="{Binding DogleRegisterCommand}"
+                                 CommandParameter="{Binding Text, Source={x:Reference txt_12v}}">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" Glyph="&#xF0417;" 
+                                             Color="{StaticResource theme_color}">
+                                <FontImageSource.Size>
+                                    <OnIdiom x:TypeArguments="x:Double" Tablet="47" Phone="45"/>
+                                </FontImageSource.Size>
+                            </FontImageSource>
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="7" Style="{StaticResource frame}" Padding="20,0,2,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Subscription" Style="{StaticResource lbl}"/>
+                    <ImageButton Grid.Column="1" BackgroundColor="White" Margin="3"
+                                  CornerRadius="23" Command="{Binding AddNewVehicleCommand}">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="{DynamicResource Material}" Glyph="&#xF0417;" 
+                                             Color="{StaticResource theme_color}">
+                                <FontImageSource.Size>
+                                    <OnIdiom x:TypeArguments="x:Double" Tablet="47" Phone="45"/>
+                                </FontImageSource.Size>
+                            </FontImageSource>
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
+            </Frame>
+            <Button Grid.Row="8" Text="Change Password" Style="{StaticResource btn}" Command="{Binding SubmitCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

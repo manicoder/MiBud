@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MiBud.Views.LiveParameter.LiveParameterPage"
+             xmlns:local="clr-namespace:MiBud.CustomControls"
+             BackgroundColor="{StaticResource page_bg_color}">
+   
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition >
+                    <RowDefinition.Height>
+                        <OnIdiom x:TypeArguments="GridLength" Tablet="64" Phone="57" Desktop="60"/>
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid ColumnSpacing="3" Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="0" CornerRadius="2" Padding="2" BorderColor="{StaticResource theme_color}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <local:CustomEntry x:Name="txtSearch" 
+                                           Grid.Column="0" 
+                                           Text="{Binding search_key}"
+                                           Placeholder="Search"
+                                           Style="{StaticResource ent}" />
+                        <!--<Image x:Name="imgClose" Grid.Column="1" Source="ic_close.png" Margin="9" IsVisible="False">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="CloseClick" />
+                            </Image.GestureRecognizers>
+                        </Image>-->
+                    </Grid>
+                </Frame>
+                <Button Grid.Column="1" Text="Select All" BackgroundColor="#083a81" 
+                        CornerRadius="3" TextColor="White" FontSize="13"
+                        Command="{Binding SelectPidCommand}"/>
+            </Grid>
+            <Grid Grid.Row="1" Padding="10,0,10,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition >
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45" Desktop="50"/>
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="EmsView" IsVisible="True" RowSpacing="0">
+                    <ListView Grid.Row="0" x:Name="ems_List"  ItemsSource="{Binding pid_list}" HasUnevenRows="true" 
+                           SeparatorVisibility="Default" VerticalScrollBarVisibility="Never" 
+                           VerticalOptions="FillAndExpand" SeparatorColor="#7D7C7C" Margin="10,0,10,0">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid RowSpacing="2" Margin="0,8,0,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition>
+                                                <ColumnDefinition.Width>
+                                                    <OnIdiom x:TypeArguments="GridLength" Tablet="35" Phone="30" Desktop="35"/>
+                                                </ColumnDefinition.Width>
+                                            </ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" 
+                                               Text="{Binding short_name}" 
+                                               Style="{StaticResource lbl}"/>
+                                        <CheckBox Grid.Column="1" 
+                                                  Scale="1.3" 
+                                                  Color="{StaticResource theme_color}"
+                                                  IsChecked="{Binding Selected}" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+
+                <Button Grid.Row="1" Text="Continue" x:Name="btnContinue" Margin="0"
+                        IsEnabled="True" Style="{StaticResource btn}"
+                        Command="{Binding ContinueCommand}"/>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

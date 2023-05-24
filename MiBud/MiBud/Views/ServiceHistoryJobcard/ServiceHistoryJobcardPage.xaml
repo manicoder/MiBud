@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MiBud.Views.ServiceHistoryJobcard.ServiceHistoryJobcardPage"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:local="clr-namespace:MiBud.CustomControls"
+             BackgroundColor="{StaticResource page_bg_color}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="img_connected_vehicle" IconImageSource="ic_connected_vehicle" Order="Primary" Priority="0"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView InputTransparent="True">
+            <Grid Grid.Row="0" RowSpacing="10" Padding="10
+                  ">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="150" Phone="150"/>
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="30" Phone="28" />
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="Auto" Phone="Auto" />
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="30" Phone="28" />
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="Auto" Phone="Auto" />
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="30" Phone="28" />
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Height>
+                            <OnIdiom x:TypeArguments="GridLength" Tablet="Auto" Phone="Auto" />
+                        </RowDefinition.Height>
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ColumnSpacing="25" VerticalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                            <ColumnDefinition.Width>
+                                <OnIdiom x:TypeArguments="GridLength" Tablet="120" Phone="100" />
+                            </ColumnDefinition.Width>
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" x:Name="img" Source="ic_user.png"/>
+                    <Grid Grid.Column="1" x:Name="grd" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" x:Name="txt_title" Style="{StaticResource lbl}"/>
+                        <Label Grid.Row="1" x:Name="txt_id" Style="{StaticResource lbl}"/>
+                        <Label Grid.Row="2" x:Name="txt_name" Style="{StaticResource lbl}"/>
+                        <Label Grid.Row="3" x:Name="txt_manager" Style="{StaticResource lbl}"/>
+                    </Grid>
+                </Grid>
+
+
+                <Label Grid.Row="2" Text="Symptoms" Style="{StaticResource lbl}" 
+                           FontSize="17" VerticalTextAlignment="End"/>
+                <CollectionView Grid.Row="3" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
+                                    HeightRequest="{Binding symotomps_list_height}" >
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="10"/>
+                                </Grid.RowDefinitions>
+                                <Grid ColumnSpacing="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition>
+                                            <ColumnDefinition.Width>
+                                                <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45" />
+                                            </ColumnDefinition.Width>
+                                        </ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame Grid.Column="0" Style="{StaticResource frame}">
+                                        <Grid ColumnSpacing="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="1.5"/>
+                                                <ColumnDefinition>
+                                                    <ColumnDefinition.Width>
+                                                        <OnIdiom x:TypeArguments="GridLength" Tablet="50" Phone="40" />
+                                                    </ColumnDefinition.Width>
+                                                </ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding name}" Style="{StaticResource lbl}"
+                                                   Margin="5,0,0,0" TextColor="{Binding text_color}" />
+                                            <BoxView Grid.Column="1" BackgroundColor="{StaticResource theme_color}" IsVisible="{Binding line_visible}"/>
+                                            <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                                <Label.FontSize>
+                                                    <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
+                                                </Label.FontSize>
+                                            </Label>
+                                            <!--<Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="select_symptoms_clicked"/>
+                                            </Grid.GestureRecognizers>-->
+                                        </Grid>
+                                    </Frame>
+
+                                    <Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="{StaticResource theme_color}"
+                                           IsVisible="{Binding add_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="Red"
+                                           IsVisible="{Binding delete_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="Green"
+                                           IsVisible="{Binding right_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"
+                                           IsVisible="{Binding wrong_btn_visible}" TextColor="Red">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <!--<ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding add_btn_visible}"/>
+                                    <ImageButton Grid.Column="1" Source="ic_delete"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding delete_btn_visible}"
+                                                     Margin="4"/>
+                                    <ImageButton Grid.Column="1" Source="ic_right"  BackgroundColor="#fff" CornerRadius="25"
+                                                     IsVisible="{Binding right_btn_visible}" Margin="4"
+                                                     Clicked="wrong_btn_Clicked"/>
+                                    <ImageButton Grid.Column="1" Source="ic_wrong"  BackgroundColor="#fff" CornerRadius="25"
+                                                     IsVisible="{Binding wrong_btn_visible}" Margin="4"
+                                                     Clicked="wrong_btn_Clicked"/>-->
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label Text="No jobcard found." FontAttributes="Bold" FontSize="18"
+                               TextColor="{StaticResource text_color}" VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+                <Label Grid.Row="4" Text="Spare Parts (INR 100)" Style="{StaticResource lbl}" 
+                           FontSize="17" VerticalTextAlignment="End"/>
+                <CollectionView Grid.Row="5" ItemsSource="{Binding spare_parts_list}" ItemSizingStrategy="MeasureAllItems"
+                                    HeightRequest="{Binding spare_parts_list_height}" >
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="10"/>
+                                </Grid.RowDefinitions>
+                                <Grid ColumnSpacing="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition>
+                                            <ColumnDefinition.Width>
+                                                <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45" />
+                                            </ColumnDefinition.Width>
+                                        </ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Frame Grid.Column="0" Style="{StaticResource frame}">
+                                        <Grid ColumnSpacing="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="1.5"/>
+                                                <ColumnDefinition>
+                                                    <ColumnDefinition.Width>
+                                                        <OnIdiom x:TypeArguments="GridLength" Tablet="50" Phone="40" />
+                                                    </ColumnDefinition.Width>
+                                                </ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding name}" Style="{StaticResource lbl}"
+                                                   Margin="5,0,0,0" TextColor="{Binding text_color}" />
+                                            <BoxView Grid.Column="1" BackgroundColor="{StaticResource theme_color}" IsVisible="{Binding line_visible}"/>
+                                            <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                                <Label.FontSize>
+                                                    <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
+                                                </Label.FontSize>
+                                            </Label>
+                                            <!--<Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="select_spare_parts_clicked"/>
+                                            </Grid.GestureRecognizers>-->
+                                        </Grid>
+                                    </Frame>
+
+                                    <Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="{StaticResource theme_color}"
+                                           IsVisible="{Binding add_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="Red"
+                                           IsVisible="{Binding delete_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="Green"
+                                           IsVisible="{Binding right_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"
+                                           IsVisible="{Binding wrong_btn_visible}" TextColor="Red">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <!--<ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding add_btn_visible}"/>
+                                    <ImageButton Grid.Column="1" Source="ic_delete"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding delete_btn_visible}"
+                                                     Margin="4"/>
+                                    <ImageButton Grid.Column="1" Source="ic_right"  BackgroundColor="#fff" CornerRadius="25"
+                                                     IsVisible="{Binding right_btn_visible}" Margin="4"
+                                                     Clicked="wrong_btn_Clicked"/>
+                                    <ImageButton Grid.Column="1" Source="ic_wrong"  BackgroundColor="#fff" CornerRadius="25"
+                                                     IsVisible="{Binding wrong_btn_visible}" Margin="4"
+                                                     Clicked="wrong_btn_Clicked"/>-->
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label Text="No jobcard found." FontAttributes="Bold" FontSize="18"
+                               TextColor="{StaticResource text_color}" VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+                <Label Grid.Row="6" Text="Services (INR 250)" Style="{StaticResource lbl}" 
+                           FontSize="17" VerticalTextAlignment="End"/>
+                <CollectionView Grid.Row="7" ItemsSource="{Binding services_list}" ItemSizingStrategy="MeasureAllItems"
+                                    HeightRequest="{Binding services_list_height}" >
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="10"/>
+                                </Grid.RowDefinitions>
+                                <Grid ColumnSpacing="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition>
+                                            <ColumnDefinition.Width>
+                                                <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45" />
+                                            </ColumnDefinition.Width>
+                                        </ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Frame Grid.Column="0" Style="{StaticResource frame}">
+                                        <Grid ColumnSpacing="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="1.5"/>
+                                                <ColumnDefinition>
+                                                    <ColumnDefinition.Width>
+                                                        <OnIdiom x:TypeArguments="GridLength" Tablet="50" Phone="40" />
+                                                    </ColumnDefinition.Width>
+                                                </ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding name}" Style="{StaticResource lbl}"
+                                                   Margin="5,0,0,0" TextColor="{Binding text_color}" />
+                                            <BoxView Grid.Column="1" BackgroundColor="{StaticResource theme_color}" IsVisible="{Binding line_visible}"/>
+                                            <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                                <Label.FontSize>
+                                                    <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
+                                                </Label.FontSize>
+                                            </Label>
+                                            <!--<Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="select_service_clicked"/>
+                                            </Grid.GestureRecognizers>-->
+                                        </Grid>
+                                    </Frame>
+
+                                    <Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="{StaticResource theme_color}"
+                                           IsVisible="{Binding add_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="Red"
+                                           IsVisible="{Binding delete_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" TextColor="Green"
+                                           IsVisible="{Binding right_btn_visible}" VerticalOptions="FillAndExpand">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
+                                           HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"
+                                           IsVisible="{Binding wrong_btn_visible}" TextColor="Red">
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                        </Label.FontSize>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <!--<ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding add_btn_visible}"/>
+                                    <ImageButton Grid.Column="1" Source="ic_delete"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding delete_btn_visible}"
+                                                 Margin="4"/>
+                                    <ImageButton Grid.Column="1" Source="ic_right"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding right_btn_visible}" Margin="4"
+                                                 Clicked="wrong_btn_Clicked"/>
+                                    <ImageButton Grid.Column="1" Source="ic_wrong"  BackgroundColor="#fff" CornerRadius="25"
+                                                 IsVisible="{Binding wrong_btn_visible}" Margin="4"
+                                                 Clicked="wrong_btn_Clicked"/>-->
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label Text="No jobcard found." FontAttributes="Bold" FontSize="18"
+                               TextColor="{StaticResource text_color}" VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MiBud.Views.CreateServiceTicket.CreateServiceTicketPage"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             Title="Create Service Ticket">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="img_toolbaritem" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <maps:Map Grid.Row="0" x:Name="map" IsVisible="False"/>
+            <ListView Grid.Row="0" 
+                      ItemsSource="{Binding workshops}"
+                      SelectedItem="{Binding selected_workshops,Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="#eee">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding code}" Style="{StaticResource lbl}"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding name}" Style="{StaticResource lbl}"/>
+                                <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lbl}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding user.first_name}"/>
+                                            <Span Text="{Binding user.last_name,StringFormat=' {0}'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding user.mobile}" Style="{StaticResource lbl}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Grid.Row="1" 
+                  BackgroundColor="{Binding tab_bg_color}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                   </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" ClassId="wikitek" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" x:Name="img_wikitek" 
+                           Source="blue" Scale="1.5"
+                           Margin="0">
+                    </Image>
+                    <Label Grid.Row="1" Text="Wikitek" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{Binding wikitek_color}" FontSize="13"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MenuIcon_Tapped"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Grid Grid.Column="1" ClassId="mobitek" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" x:Name="img_mobitek" 
+                           Source="orange" 
+                           Margin="0">
+                    </Image>
+                    <Label Grid.Row="1" Text="Mobitek" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{Binding mobitek_color}" FontSize="13"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MenuIcon_Tapped"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Grid Grid.Column="2" ClassId="rsangel" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" x:Name="img_rsangel" 
+                           Source="green"
+                           Margin="2">
+                    </Image>
+                    <Label Grid.Row="1" Text="RSAngel" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{Binding rsangel_color}" FontSize="13"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MenuIcon_Tapped"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
