@@ -12,45 +12,47 @@
     </ContentPage.ToolbarItems>-->
     <ContentPage.Content>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <!--<RowDefinition Height="60"/>-->
-            </Grid.RowDefinitions>
- 
-            <maps:Map Grid.Row="0" x:Name="map" />
- 
-            <ListView Grid.Row="0" IsVisible="False"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <!--<RowDefinition Height="60"/>-->
+                </Grid.RowDefinitions>
+
+                <maps:Map Grid.Row="0" x:Name="map" Grid.RowSpan="2"/>
+
+                <ListView Grid.Row="0" IsVisible="False"
                       ItemsSource="{Binding workshops}"
                       SelectedItem="{Binding selected_workshops,Mode=TwoWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid BackgroundColor="#eee">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
-                                    <RowDefinition Height="50"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding code}" Style="{StaticResource lbl}"/>
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding name}" Style="{StaticResource lbl}"/>
-                                <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lbl}">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding user.first_name}"/>
-                                            <Span Text="{Binding user.last_name,StringFormat=' {0}'}"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding user.mobile}" Style="{StaticResource lbl}"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <!--<Grid Grid.Row="1" 
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid BackgroundColor="#eee">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="50"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding code}" Style="{StaticResource lbl}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding name}" Style="{StaticResource lbl}"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lbl}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding user.first_name}"/>
+                                                <Span Text="{Binding user.last_name,StringFormat=' {0}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding user.mobile}" Style="{StaticResource lbl}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<Grid Grid.Row="1" 
                   BackgroundColor="{Binding tab_bg_color}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -103,6 +105,21 @@
                     </Grid.GestureRecognizers>
                 </Grid>
             </Grid>-->
+
+                <Grid Grid.Row="1" RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Book Nearest" Clicked="Button_Clicked"/>
+                    <Button Text="Book Selected" Grid.Column="1" Clicked="Button_Clicked_1"/>
+                </Grid>
+
+            </Grid>
+
+            <Grid HorizontalOptions="FillAndExpand" x:Name="activityGrid" VerticalOptions="FillAndExpand" Background="#40000000">
+                <ActivityIndicator x:Name="indicator" HeightRequest="50" WidthRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
