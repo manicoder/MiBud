@@ -55,12 +55,14 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="10" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions> 
+                </Grid.RowDefinitions>
                 <Frame Grid.Row="0" x:Name="frme" Style="{StaticResource frame}" >
                     <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
                         <Label Grid.Column="1" Text="&#xF0013;" FontSize="28" FontFamily="{DynamicResource Material}" 
@@ -74,7 +76,7 @@
                             </Entry.Behaviors>
                         </local:CustomEntry>
                     </StackLayout>
-                  
+
                 </Frame>
                 <Frame Grid.Row="1" Style="{StaticResource frame}">
                     <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
@@ -98,6 +100,22 @@
                         </Label>
                     </StackLayout>
                 </Frame>
+                <Frame Grid.Row="2" Style="{StaticResource frame}"  BackgroundColor="Gray">
+                    <StackLayout VerticalOptions="CenterAndExpand" Orientation="Vertical" >
+                        <Label Grid.Column="1" Text="Or Login With OTP" TextColor="White" HeightRequest="50" FontSize="20" FontFamily="{DynamicResource Material}" 
+                                HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="3" Style="{StaticResource frame}">
+                    <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Label Grid.Column="1" Text="&#xf011c;" FontSize="26" FontFamily="{DynamicResource Material}" 
+                               TextColor="{StaticResource theme_color}" HorizontalTextAlignment="End"
+                               VerticalTextAlignment="Center"/>
+                        <local:CustomEntry Text="{Binding mobile}" Placeholder="Mobile number" 
+                                           MaxLength="10" Style="{StaticResource ent}" Keyboard="Numeric"/>
+                    </StackLayout>
+                </Frame>
                 <!--<Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -116,9 +134,9 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </Grid>-->
-                <Button Grid.Row="3" Text="Login" Style="{StaticResource btn}" Command="{Binding LoginCommand}" />
+                <Button Grid.Row="5" Text="Login" Style="{StaticResource btn}" Command="{Binding LoginCommand}" />
 
-                <Label Grid.Row="4" Style="{StaticResource lbl}" Margin="0,5,0,0"
+                <Label Grid.Row="6" Style="{StaticResource lbl}" Margin="0,5,0,0"
                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                     <Label.FormattedText>
                         <FormattedString>
@@ -132,7 +150,7 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Grid.Row="5" Style="{StaticResource lbl}" Margin="0,0,0,0"
+                <Label Grid.Row="7" Style="{StaticResource lbl}" Margin="0,0,0,0"
                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                     <Label.FormattedText>
                         <FormattedString>

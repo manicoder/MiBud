@@ -193,7 +193,7 @@
                     <ImageButton BackgroundColor="White" Command="{Binding AddNewVehicleServiceCommand}">
                         <ImageButton.Source>
                             <FontImageSource FontFamily="{DynamicResource Material}" Glyph="&#xF0417;" 
-                                             Color="{StaticResource theme_color}" Size="65" />
+                                             Color="{Binding selectedBgColor}" Size="65" />
                         </ImageButton.Source>
                     </ImageButton>
                 </Frame>

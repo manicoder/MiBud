@@ -20,7 +20,19 @@ namespace MiBud.ViewModels
         public CreateServiceTicketViewModel()
         {
             apiServices = new ApiServices();
-           // GetWorkshop();
+            // GetWorkshop();
+            if (App.selectedColor == "blue")
+            {
+                selectedBgColor = Color.Blue;
+            }
+            else if (App.selectedColor == "orange")
+            {
+                selectedBgColor = Color.Orange;
+            }
+            else if (App.selectedColor == "green")
+            {
+                selectedBgColor = Color.Green;
+            }
         }
 
         private Color _wikitek_color = (Color)Application.Current.Resources["theme_color"];
@@ -33,7 +45,16 @@ namespace MiBud.ViewModels
                 OnPropertyChanged("wikitek_color");
             }
         }
-
+        private Color _selectedBgColor;
+        public Color selectedBgColor
+        {
+            get => _selectedBgColor;
+            set
+            {
+                _selectedBgColor = value;
+                OnPropertyChanged("selectedBgColor");
+            }
+        }
         private Color _mobitek_color = (Color)Application.Current.Resources["tab_unselect_color"];
         public Color mobitek_color
         {

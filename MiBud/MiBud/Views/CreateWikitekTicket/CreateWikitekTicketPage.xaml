@@ -89,7 +89,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" x:Name="txt_workshop_mo_no" Text="0000000000" Style="{StaticResource lbl}"/>
                                     <Label Grid.Column="1" Text="&#xF03F6;" FontFamily="{DynamicResource Material}" 
-                                       TextColor="{StaticResource theme_color}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                       TextColor="{Binding selectedBgColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                                         <Label.FontSize>
                                             <OnIdiom x:TypeArguments="x:Double" Tablet="40" Phone="40"/>
                                         </Label.FontSize>
@@ -150,7 +150,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <CheckBox Grid.Column="0" 
                                       x:Name="check_pickup"
                                       IsChecked="{Binding pickup_check,Mode=TwoWay}"
@@ -162,7 +162,7 @@
                             <Button Grid.Column="2"
                                     Text="Add Address"
                                     TextColor="{StaticResource btn_text_color}"
-                                    BackgroundColor="{StaticResource theme_color}"
+                                    BackgroundColor="{Binding selectedBgColor}"
                                     Clicked="AddPickupAddressClicked">
                                 <Button.Triggers>
                                     <DataTrigger TargetType="Button"
@@ -185,7 +185,7 @@
                             <Button Grid.Column="5"
                                     Text="Add Address"
                                     TextColor="{StaticResource btn_text_color}"
-                                    BackgroundColor="{StaticResource theme_color}"
+                                    BackgroundColor="{Binding selectedBgColor}"
                                     Clicked="AddDropAddressClicked">
                                 <Button.Triggers>
                                     <DataTrigger TargetType="Button"
@@ -227,7 +227,7 @@
                                                    IsReadOnly="True"
                                                    InputTransparent="True"/>
                                 <BoxView Grid.Column="1" 
-                                     BackgroundColor="{StaticResource theme_color}"
+                                     BackgroundColor="{Binding selectedBgColor}"
                                      Margin="0,-2,0,-2"/>
                                 <ImageButton Grid.Column="2" 
                                          InputTransparent="True"
@@ -237,7 +237,7 @@
                                     <ImageButton.Source>
                                         <FontImageSource FontFamily="{DynamicResource Material}" 
                                                      Glyph="&#xF035D;" 
-                                                     Color="{StaticResource theme_color}" />
+                                                     Color="{Binding selectedBgColor}" />
                                     </ImageButton.Source>
                                 </ImageButton>
                                 <Grid.GestureRecognizers>
@@ -250,7 +250,7 @@
                         <CollectionView Grid.Row="7" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding symotomps_list_height}" >
                             <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -318,7 +318,8 @@
                                             <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
                                                TextColor="Green" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
                                                 <Label.FontSize>
-                                                    <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                                    <OnIdiom x:TypeArguments="x:Double"
+                                                             Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
                                                 </Label.FontSize>
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
@@ -348,7 +349,7 @@
                     </Grid>
                 </ScrollView>
                 <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}"
-                        Clicked="Submit_Clicked"/>
+                        Clicked="Submit_Clicked" BackgroundColor="{Binding selectedBgColor}"/>
             </Grid>
 
             <Grid IsVisible="{Binding show_service_view}">

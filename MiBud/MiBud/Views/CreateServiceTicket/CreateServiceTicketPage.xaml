@@ -111,8 +111,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Text="Book Nearest" Clicked="Button_Clicked"/>
-                    <Button Text="Book Selected" Grid.Column="1" Clicked="Button_Clicked_1"/>
+                    <Button Text="Book Nearest" Clicked="Button_Clicked"  BackgroundColor="{Binding selectedBgColor}"/>
+                    <Button Text="Book Selected" Grid.Column="1" Clicked="Button_Clicked_1" BackgroundColor="{Binding selectedBgColor}"/>
                 </Grid>
 
             </Grid>
