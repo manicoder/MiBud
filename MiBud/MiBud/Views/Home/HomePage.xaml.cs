@@ -19,13 +19,14 @@ namespace MiBud.Views.Home
         {
             try
             {
-
                 InitializeComponent();
                 BindingContext = viewModel = new HomeViewModel(this, vehicle);
                 selected_vehicle_picture = App.selected_vehicle_picture;
                 img_toolbaritem.IconImageSource = "blue.png";
                 App.selectedIcon = string.Empty;
                 App.selected_vehicle_Service = string.Empty;
+                App.currentServiceLocation = null;
+                App.CurrentWorkshop = null;
             }
             catch (System.Exception ex)
             {

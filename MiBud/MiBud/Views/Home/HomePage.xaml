@@ -30,7 +30,7 @@
    
     <ContentPage.Content>
         <ScrollView>
-            <Grid RowDefinitions="Auto,Auto,60,*" RowSpacing="0">
+            <Grid RowDefinitions="Auto,Auto,160,*" RowSpacing="0">
                 <Image Source="{Binding selected_vehicle.vehicle_picture,Converter={StaticResource image_converter}}"
                    HeightRequest="190" Aspect="Fill"/>
                 <Frame Grid.Row="1" HasShadow="True" Margin="1" Padding="10">
@@ -46,7 +46,7 @@
                        Style="{StaticResource lbl}"/>
                     </Grid>
                 </Frame>
-                <Grid Grid.Row="2" Padding="5"
+                <Grid Grid.Row="2"  Margin="20,30,20,10"
                   BackgroundColor="{Binding tab_bg_color}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -59,7 +59,7 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <Image Grid.Row="0" x:Name="img_wikitek" 
-                           Source="blue" Scale="1.5"
+                           Source="blue" 
                            Margin="0">
                         </Image>
                         <Label Grid.Row="1" Text="Wikitek" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
