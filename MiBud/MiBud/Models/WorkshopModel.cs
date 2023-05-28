@@ -25,6 +25,7 @@ namespace MiBud.Models
         public string address { get; set; }
         public User user { get; set; }
         public string email { get; set; }
+        public string gps_location { get; set; }
     }
 
     public class Country

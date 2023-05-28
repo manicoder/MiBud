@@ -6,20 +6,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace MiBud.ViewModels
 {
     public class CreateServiceTicketViewModel : BaseViewModel
     {
         ApiServices apiServices;
-        
+
         public CreateServiceTicketViewModel()
         {
             apiServices = new ApiServices();
-            GetWorkshop();
+           // GetWorkshop();
         }
-     
+
         private Color _wikitek_color = (Color)Application.Current.Resources["theme_color"];
         public Color wikitek_color
         {
@@ -75,9 +78,20 @@ namespace MiBud.ViewModels
             }
         }
 
-        public async void GetWorkshop()
+        private ObservableCollection<Pin> mAllPins;
+        public ObservableCollection<Pin> AllPins
         {
-            var result = await apiServices.GetWorkshop(Xamarin.Essentials.Preferences.Get("token", null));
+            get { return mAllPins; }
+            set
+            {
+                mAllPins = value;
+                OnPropertyChanged(nameof(AllPins));
+            }
+        }
+
+        public async Task GetWorkshop()
+        {
+            var result = await apiServices.GetWorkshop(Xamarin.Essentials.Preferences.Get("token", null), "wikitekMechanik");
 
             if (!result.success)
             {
@@ -95,6 +109,35 @@ namespace MiBud.ViewModels
 
 
             workshops = new ObservableCollection<WorkshopResult>(result.results.ToList());
+            AllPins = new ObservableCollection<Pin>();
+
+            foreach (var item in workshops)
+            {
+
+                string gpsLat = item.gps_location?.Split(',')[0].Trim();
+                string gpsLong = item.gps_location?.Split(',')[1].Trim();
+
+                Pin pin = new Pin
+                {
+                    Label = item.name,
+                    Address = item.address,
+                    Type = PinType.Place,
+                    Position = new Position(double.Parse(gpsLat), double.Parse(gpsLong))
+                };
+                AllPins.Add(pin);
+            }
+        }
+
+        public async Task<Position?> GetLatLong(string address)
+        {
+            var locations = await Geocoding.GetLocationsAsync(address);
+            var location = locations?.FirstOrDefault();
+            if (location != null)
+            {
+                var position = new Position(location.Latitude, location.Longitude);
+                return position;
+            }
+            return null;
         }
     }
 }
