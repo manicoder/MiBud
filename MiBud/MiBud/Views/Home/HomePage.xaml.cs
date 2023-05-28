@@ -98,7 +98,7 @@ namespace MiBud.Views.Home
                         App.selectedIcon = "mobitek";
                         App.selected_vehicle_Service = "mobitekMechanik";
                         App.selectedColor = "orange";
-                        ChangeStatusColor(Color.Orange);
+                        ChangeStatusColor((Color)Application.Current.Resources["theme_color"]);
                         break;
 
                     case "rsangel":

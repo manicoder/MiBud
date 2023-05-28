@@ -18,7 +18,7 @@ namespace MiBud.Views.MyVehicle
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ChangeStatusColor(Color.Orange);
+            ChangeStatusColor((Color)Application.Current.Resources["theme_color"]);
         }
         private static void ChangeStatusColor(Color color)
         {
