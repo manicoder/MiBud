@@ -4,7 +4,9 @@ using MiBud.Models;
 using MiBud.Services;
 using MiBud.StaticInfo;
 using MiBud.Views.MasterDetail;
+using MiBud.Views.MobileOtp;
 using MiBud.Views.MyVehicle;
+using MiBud.Views.NewVehicle;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,7 +31,7 @@ namespace MiBud.ViewModels
             {
                 apiServices = new ApiServices();
                 user_detail = new LoginModel();
-
+                App.otpmobileno = string.Empty;
                 this.page = page;
                 this.navigationService = page.Navigation;
                 this.device_mac_id = DependencyService.Get<IDeviceMacAddress>();
@@ -103,6 +105,17 @@ namespace MiBud.ViewModels
                 }
 
                 OnPropertyChanged("password");
+            }
+        }
+
+        private string _mobile;
+        public string mobile
+        {
+            get => _mobile;
+            set
+            {
+                _mobile = value;
+                OnPropertyChanged("mobile");
             }
         }
 
@@ -210,9 +223,20 @@ namespace MiBud.ViewModels
 
             LoginCommand = new Command(async (obj) =>
             {
-                GoToMasterPage();
+                if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+                {
+                    GoToMasterPage();
+                }
+                else if (!string.IsNullOrEmpty(mobile))
+                {
+                    App.otpmobileno = this.mobile;
+                    using (UserDialogs.Instance.Loading("Loading...", null, null, true, MaskType.Black))
+                    {
+                        await Task.Delay(200);
+                        await this.page.Navigation.PushAsync(new MobileOtp());
+                    }
+                }
             });
-
             SingUpCommand = new Command(async (obj) =>
             {
                 GoToRegistrationPage();
@@ -373,7 +397,7 @@ namespace MiBud.ViewModels
                 await Task.Delay(200);
                 string description = "Enter your Registered mobile / Email ID number";
                 //string description = "Forgot Password An OTP has been sent to your mobile and will be valid for 10 mins.Pls enter the OTP here";
-                await navigationService.PushAsync(new Views.Otp.OtpPage(false, false,description));
+                await navigationService.PushAsync(new Views.Otp.OtpPage(false, false, description));
             }
         }
 

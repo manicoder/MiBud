@@ -27,6 +27,19 @@ namespace MiBud.ViewModels
                 GetJobcardList();
                 //this.navigationService = page.Navigation;
                 this.selected_vehicle = selected_vehicle;
+
+                if (App.selectedColor == "blue")
+                {
+                    selectedBgColor = Color.Blue;
+                }
+                else if (App.selectedColor == "orange")
+                {
+                    selectedBgColor = Color.Orange;
+                }
+                else if (App.selectedColor == "green")
+                {
+                    selectedBgColor = Color.Green;
+                }
                 //InitializeCommands();
                 //vehicle_service_list = new ObservableCollection<VehicleServiceModel>
                 //{
@@ -70,6 +83,19 @@ namespace MiBud.ViewModels
         }
 
         #region Properties
+
+        private Color _selectedBgColor;
+        public Color selectedBgColor
+        {
+            get => _selectedBgColor;
+            set
+            {
+                _selectedBgColor = value;
+                OnPropertyChanged("selectedBgColor");
+            }
+        }
+
+
         private ObservableCollection<JobcardResult> _jobcard_list;
         public ObservableCollection<JobcardResult> jobcard_list
         {

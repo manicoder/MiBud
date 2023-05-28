@@ -1,5 +1,7 @@
 ﻿using Acr.UserDialogs;
 using MiBud.Models;
+using MiBud.Views.CreateWikitekTicket;
+using MiBud.Views.VehicleService;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -86,6 +88,16 @@ namespace MiBud.ViewModels
                     await sender.FadeTo(0, 250);
                     await sender.FadeTo(1, 250);
                     await Task.Delay(100);
+
+
+
+                    //App.Current.MainPage = new NavigationPage(new Views.VehicleService.VehicleServicePage(selected_vehicle))
+                    //{
+                    //    BarBackgroundColor=Color.Blue
+                    //};
+
+
+                  
                     await this.page.Navigation.PushAsync(new Views.VehicleService.VehicleServicePage(selected_vehicle));
                 }
                 catch (Exception ex)

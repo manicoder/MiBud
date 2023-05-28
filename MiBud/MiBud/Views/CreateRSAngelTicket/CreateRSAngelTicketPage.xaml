@@ -91,7 +91,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" x:Name="txt_workshop_mo_no" Text="0000000000" Style="{StaticResource lbl}"/>
                                 <Label Grid.Column="1" Text="&#xF03F6;" FontFamily="{DynamicResource Material}" 
-                                       TextColor="{StaticResource theme_color}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                       TextColor="{Binding selectedBgColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                                     <Label.FontSize>
                                         <OnIdiom x:TypeArguments="x:Double" Tablet="40" Phone="40"/>
                                     </Label.FontSize>
@@ -127,15 +127,15 @@
                                         </ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Label  Style="{StaticResource lbl}" TextColor="{StaticResource placeholder_color}" />
-                                    <BoxView Grid.Column="1" x:Name="img_line_ds" BackgroundColor="{StaticResource theme_color}"/>
-                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                    <BoxView Grid.Column="1" x:Name="img_line_ds" BackgroundColor="{Binding selectedBgColor}"/>
+                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{Binding selectedBgColor}"
                                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                                         <Label.FontSize>
                                             <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
                                         </Label.FontSize>
                                     </Label>
                                 </Grid>
-                                <local:CustomDatePicker TextColor="{StaticResource text_color}" FontSize="{StaticResource font_size}"/>
+                                <local:CustomDatePicker TextColor="{Binding selectedBgColor}" FontSize="{StaticResource font_size}"/>
                             </Grid>
                         </Frame>
                         <Frame Grid.Column="1" Style="{StaticResource frame}">
@@ -150,16 +150,16 @@
                                             </ColumnDefinition.Width>
                                         </ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Label  Style="{StaticResource lbl}" TextColor="{StaticResource placeholder_color}" />
-                                    <BoxView Grid.Column="1" x:Name="img_line_de" BackgroundColor="{StaticResource theme_color}"/>
-                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                    <Label  Style="{StaticResource lbl}" TextColor="{Binding selectedBgColor}" />
+                                    <BoxView Grid.Column="1" x:Name="img_line_de" BackgroundColor="{Binding selectedBgColor}"/>
+                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{Binding selectedBgColor}"
                                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                                         <Label.FontSize>
                                             <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
                                         </Label.FontSize>
                                     </Label>
                                 </Grid>
-                                <local:CustomTimePicker TextColor="{StaticResource text_color}" FontSize="{StaticResource font_size}"/>
+                                <local:CustomTimePicker TextColor="{Binding selectedBgColor}" FontSize="{StaticResource font_size}"/>
                             </Grid>
                         </Frame>
                     </Grid>
@@ -366,7 +366,7 @@
                     </CollectionView>-->
                 </Grid>
             </ScrollView>
-            <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}"/>
+            <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}" BackgroundColor="{Binding selectedBgColor}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

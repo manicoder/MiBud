@@ -27,6 +27,7 @@ namespace MiBud.Views.Home
                 App.selected_vehicle_Service = string.Empty;
                 App.currentServiceLocation = null;
                 App.CurrentWorkshop = null;
+                App.selectedColor = string.Empty;
             }
             catch (System.Exception ex)
             {
@@ -45,8 +46,10 @@ namespace MiBud.Views.Home
         }
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-           if (selected_page == "wikitek")
+            if (selected_page == "wikitek")
             {
+                
+
                 this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
             }
             else if (selected_page == "mobitek")
@@ -83,6 +86,7 @@ namespace MiBud.Views.Home
                         img_toolbaritem.IconImageSource = "blue.png";
                         App.selectedIcon = "wikitek";
                         App.selected_vehicle_Service = "wikitekMechanik";
+                        App.selectedColor = "blue";
                         break;
 
                     case "mobitek":
@@ -92,7 +96,7 @@ namespace MiBud.Views.Home
                         img_toolbaritem.IconImageSource = "orange.png";
                         App.selectedIcon = "mobitek";
                         App.selected_vehicle_Service = "mobitekMechanik";
-
+                        App.selectedColor = "orange";
                         break;
 
                     case "rsangel":
@@ -102,7 +106,7 @@ namespace MiBud.Views.Home
                         img_toolbaritem.IconImageSource = "green.png";
                         App.selectedIcon = "rsangel";
                         App.selected_vehicle_Service = "RSAngelMechanik";
-
+                        App.selectedColor = "green";
                         break;
 
                 }
