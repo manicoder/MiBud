@@ -55,15 +55,17 @@ namespace MiBud.Views.CreateMobitekTicket
 
                 map.Pins.Add(App.currentServiceLocation);
 
-
                 Pin pin = new Pin
                 {
-                    Label = "",
-                    Address = "",
+                    Label = App.CurrentWorkshop.name.ToString(),
+                    Address = App.CurrentWorkshop.address.ToString(),
                     Type = PinType.Place,
                     Position = currentPostion
                 };
                 map.Pins.Add(pin);
+                txt_workshop_name.Text = App.CurrentWorkshop.name.ToString();
+                txt_workshop_id.Text = App.CurrentWorkshop.id.ToString();
+                txt_workshop_mo_no.Text = App.CurrentWorkshop.email.ToString();
             }
 
         }

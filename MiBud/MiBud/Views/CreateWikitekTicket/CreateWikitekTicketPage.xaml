@@ -72,8 +72,31 @@
                                     </ColumnDefinition.Width>
                                 </ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="ic_user.png"/>
+                            <Image Grid.Column="0" Source="blue.png"/>
                             <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" x:Name="txt_workshop_id" Text="Workshop Id" Style="{StaticResource lbl}"/>
+                                <Label Grid.Row="1" x:Name="txt_workshop_name" Text="Workshop Name" Style="{StaticResource lbl}"/>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="35"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" x:Name="txt_workshop_mo_no" Text="0000000000" Style="{StaticResource lbl}"/>
+                                    <Label Grid.Column="1" Text="&#xF03F6;" FontFamily="{DynamicResource Material}" 
+                                       TextColor="{StaticResource theme_color}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="40" Phone="40"/>
+                                        </Label.FontSize>
+                                    </Label>
+                                </Grid>
+                            </Grid>
+                            <!--<Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -91,7 +114,7 @@
                                     </Label.FormattedText>
                                 </Label>
                                 <Label Grid.Row="3" Text="{Binding workshop.user.mobile}" Style="{StaticResource lbl}"/>
-                            </Grid>
+                            </Grid>-->
                         </Grid>
                         <!--<Grid Grid.Row="1" ColumnSpacing="20" Padding="0,10,0,10">
                         <Grid.ColumnDefinitions>

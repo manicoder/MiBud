@@ -40,6 +40,7 @@ namespace MiBud
         public static LoginModel login_model = new LoginModel();
 
         public static Pin currentServiceLocation;
+        internal static WorkshopResult CurrentWorkshop;
 
         public App()
         {

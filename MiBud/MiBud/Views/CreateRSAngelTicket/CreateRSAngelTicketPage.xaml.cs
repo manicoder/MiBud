@@ -1,6 +1,7 @@
 ﻿using MiBud.Models;
 using MiBud.PopupPages;
 using MiBud.ViewModels;
+using Plugin.Geolocator;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Linq;
@@ -24,16 +25,35 @@ namespace MiBud.Views.CreateRSAngelTicket
             BindingContext = viewModel = new CreateRSAngelTicketViewModel();
             this.selected_vehicle = selected_vehicle;
             services = new Services.ApiServices();
-            if (App.currentServiceLocation != null)
-            {
-                MapSpan mapSpan = MapSpan.FromCenterAndRadius(App.currentServiceLocation.Position, Distance.FromKilometers(10));
-                map.MoveToRegion(mapSpan);
-            }
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
+            if (App.currentServiceLocation != null)
+            {
+                MapSpan mapSpan = MapSpan.FromCenterAndRadius
+                    (App.currentServiceLocation.Position, Distance.FromKilometers(10));
+                map.MoveToRegion(mapSpan);
+
+                var locator = CrossGeolocator.Current;
+                var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
+                var currentPostion = new Position(position.Latitude, position.Longitude);
+
+                map.Pins.Add(App.currentServiceLocation);
+
+                Pin pin = new Pin
+                {
+                    Label = App.CurrentWorkshop.name.ToString(),
+                    Address = App.CurrentWorkshop.address.ToString(),
+                    Type = PinType.Place,
+                    Position = currentPostion
+                };
+                map.Pins.Add(pin);
+                txt_workshop_name.Text = App.CurrentWorkshop.name.ToString();
+                txt_workshop_id.Text = App.CurrentWorkshop.id.ToString();
+                txt_workshop_mo_no.Text = App.CurrentWorkshop.email.ToString();
+            }
 
             MessagingCenter.Subscribe<SymptomsPopupPage, SymptomRtModel>(this, "selected_symptoms", async (sender, arg) =>
             {

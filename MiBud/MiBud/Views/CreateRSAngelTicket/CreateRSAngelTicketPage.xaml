@@ -74,7 +74,7 @@
                                 </ColumnDefinition.Width>
                             </ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="ic_user.png"/>
+                        <Image Grid.Column="0" Source="green.png"/>
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -100,7 +100,7 @@
                         </Grid>
                     </Grid>
                     <maps:Map Grid.Row="1" x:Name="map" />
-                    <Grid Grid.Row="2">
+                    <!--<Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
@@ -108,8 +108,8 @@
                         <CheckBox IsChecked="False" Color="{StaticResource theme_color}" Scale="1.2"/>
                         <Label Grid.Column="1" Text="Immediate" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="Center"/>
-                    </Grid>
-                    <Grid Grid.Row="3" ColumnSpacing="10">
+                    </Grid>-->
+                    <Grid Grid.Row="2" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -164,7 +164,7 @@
                         </Frame>
                     </Grid>
 
-                    <Label Grid.Row="4" Text="Add Symptoms" Style="{StaticResource lbl}" 
+                    <!--<Label Grid.Row="4" Text="Add Symptoms" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
                     <CollectionView Grid.Row="5" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding symotomps_list_height}" >
@@ -224,7 +224,7 @@
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                        --><!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
                                                TextColor="Red" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
                                             <Label.FontSize>
                                                 <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
@@ -242,7 +242,7 @@
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
                                             </Label.GestureRecognizers>
-                                        </Label>-->
+                                        </Label>--><!--
                                         
                                         <ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
                                                  Clicked="create_new_symptoms_clicked" IsVisible="{Binding add_btn_visible}"/>
@@ -314,7 +314,7 @@
                                             </Grid>
                                         </Frame>
 
-                                        <!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                        --><!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
                                                TextColor="{StaticResource theme_color}" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
                                             <Label.FontSize>
                                                 <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
@@ -342,7 +342,7 @@
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
                                             </Label.GestureRecognizers>
-                                        </Label>-->
+                                        </Label>--><!--
 
 
                                         <ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
@@ -363,7 +363,7 @@
                                HorizontalTextAlignment="Center" />
                             </Grid>
                         </CollectionView.EmptyView>
-                    </CollectionView>
+                    </CollectionView>-->
                 </Grid>
             </ScrollView>
             <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}"/>

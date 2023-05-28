@@ -74,7 +74,7 @@
                                 </ColumnDefinition.Width>
                             </ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="ic_user.png"/>
+                        <Image Grid.Column="0" Source="orange.png"/>
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -99,7 +99,7 @@
                         </Grid>
                     </Grid>
                     <maps:Map Grid.Row="1" x:Name="map" />
-                    <Grid Grid.Row="2">
+                    <!--<Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
@@ -107,8 +107,8 @@
                         <CheckBox IsChecked="False" Color="{StaticResource theme_color}" Scale="1.2"/>
                         <Label Grid.Column="1" Text="Immediate" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="Center"/>
-                    </Grid>
-                    <Grid Grid.Row="3" ColumnSpacing="10">
+                    </Grid>-->
+                    <Grid Grid.Row="2" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -164,7 +164,7 @@
                         </Frame>
                     </Grid>
                  
-                    <Label Grid.Row="4" Text="Add Symptoms" Style="{StaticResource lbl}" 
+                    <!--<Label Grid.Row="4" Text="Add Symptoms" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
                     <CollectionView Grid.Row="5" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding symotomps_list_height}" >
@@ -244,13 +244,13 @@
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <!--<ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
+                                        --><!--<ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
                                                  Clicked="create_new_symptoms_clicked" IsVisible="{Binding add_btn_visible}"/>
                                         <ImageButton Grid.Column="1" Source="ic_delete"  BackgroundColor="#fff" CornerRadius="25"
                                                  Clicked="delete_symptoms_clicked" IsVisible="{Binding delete_btn_visible}"
                                                      Margin="4"
                                         <ImageButton Grid.Column="1" Source="ic_right"  BackgroundColor="#fff" CornerRadius="25"
-                                                     IsVisible="{Binding right_btn_visible}" Margin="4"/>-->
+                                                     IsVisible="{Binding right_btn_visible}" Margin="4"/>--><!--
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -344,13 +344,13 @@
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <!--<ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
+                                        --><!--<ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
                                                  Clicked="create_new_service_clicked" IsVisible="{Binding add_btn_visible}"/>
                                         <ImageButton Grid.Column="1" Source="ic_delete"  BackgroundColor="#fff" CornerRadius="25"
                                                  Clicked="delete_services_clicked" IsVisible="{Binding delete_btn_visible}"
                                                      Margin="4"/>
                                         <ImageButton Grid.Column="1" Source="ic_right"  BackgroundColor="#fff" CornerRadius="25"
-                                                     IsVisible="{Binding right_btn_visible}" Margin="4"/>-->
+                                                     IsVisible="{Binding right_btn_visible}" Margin="4"/>--><!--
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -362,7 +362,7 @@
                                HorizontalTextAlignment="Center" />
                             </Grid>
                         </CollectionView.EmptyView>
-                    </CollectionView>
+                    </CollectionView>-->
                 </Grid>
             </ScrollView>
             <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}"/>

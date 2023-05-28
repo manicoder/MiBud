@@ -72,9 +72,11 @@ namespace MiBud.Views.CreateServiceTicket
                 map.Pins.Add(pin);
                 pin.Clicked += delegate
                 {
+                    var indx = map.Pins.IndexOf(pin);
+                    App.CurrentWorkshop = viewModel.workshops[indx];
                     App.currentServiceLocation = pin;
 
-                    
+
                     if (App.selectedIcon == "wikitek")
                     {
                         this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
