@@ -10,7 +10,7 @@
              BackgroundColor="{StaticResource page_bg_color}"
              Title="Create Wikitek Ticket">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="img_connected_vehicle" IconImageSource="ic_connected_vehicle" Order="Primary" Priority="0"/>
+        <ToolbarItem x:Name="img_connected_vehicle" IconImageSource="blue.png" Order="Primary" Priority="0"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
