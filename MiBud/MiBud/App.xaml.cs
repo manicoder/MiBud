@@ -17,6 +17,7 @@ namespace MiBud
         public static bool bt_available = true;
         public static bool dongle_connected = false;
         public static string selected_vehicle_picture = string.Empty;
+        public static string selectedIcon = string.Empty;
         public static bool is_update = true;
         public static string refresh_token = string.Empty;
         public static string access_token = string.Empty;

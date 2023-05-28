@@ -20,6 +20,7 @@ namespace MiBud.Views.ForgotPassword
 
         private void submit_Clicked(object sender, EventArgs e)
         {
+
             string description = "Forgot Password An OTP has been sent to your mobile and will be valid for 10 mins.Pls enter the OTP here";
             //this.Navigation.PushAsync(new OtpPage(false, description));
         }
