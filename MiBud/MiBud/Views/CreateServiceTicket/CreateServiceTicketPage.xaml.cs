@@ -50,8 +50,6 @@ namespace MiBud.Views.CreateServiceTicket
                 });
                 return true; // runs again, or false to stop
             });
-
-
         }
         protected async override void OnAppearing()
         {
@@ -62,7 +60,7 @@ namespace MiBud.Views.CreateServiceTicket
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(currentPostion, Distance.FromKilometers(10));
             map.MoveToRegion(mapSpan);
 
-             
+
             activityGrid.IsVisible = true;
             indicator.IsVisible = true;
             indicator.IsRunning = true;
@@ -155,7 +153,7 @@ namespace MiBud.Views.CreateServiceTicket
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-
+            GoToMethod();
         }
 
         //        switch (GirdClassId)
