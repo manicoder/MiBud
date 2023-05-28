@@ -90,8 +90,8 @@ namespace MiBud.ViewModels
         }
 
         public async Task GetWorkshop()
-        {
-            var result = await apiServices.GetWorkshop(Xamarin.Essentials.Preferences.Get("token", null), "wikitekMechanik");
+        { 
+            var result = await apiServices.GetWorkshop(Xamarin.Essentials.Preferences.Get("token", null), App.selected_vehicle_Service);
 
             if (!result.success)
             {
@@ -112,8 +112,7 @@ namespace MiBud.ViewModels
             AllPins = new ObservableCollection<Pin>();
 
             foreach (var item in workshops)
-            {
-
+            { 
                 string gpsLat = item.gps_location?.Split(',')[0].Trim();
                 string gpsLong = item.gps_location?.Split(',')[1].Trim();
 

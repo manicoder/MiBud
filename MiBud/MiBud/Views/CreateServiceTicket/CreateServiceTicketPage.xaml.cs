@@ -3,6 +3,7 @@ using MiBud.ViewModels;
 using MiBud.Views.CreateMobitekTicket;
 using MiBud.Views.CreateRSAngelTicket;
 using MiBud.Views.CreateWikitekTicket;
+using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,11 @@ namespace MiBud.Views.CreateServiceTicket
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
+            var currentPostion = new Position(position.Latitude, position.Longitude);
+            MapSpan mapSpan = MapSpan.FromCenterAndRadius(currentPostion, Distance.FromKilometers(10));
+            map.MoveToRegion(mapSpan);
             await GetWorkshops();
         }
         private async Task GetWorkshops()
@@ -66,6 +72,9 @@ namespace MiBud.Views.CreateServiceTicket
                 map.Pins.Add(pin);
                 pin.Clicked += delegate
                 {
+                    App.currentServiceLocation = pin;
+
+                    
                     if (App.selectedIcon == "wikitek")
                     {
                         this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
@@ -80,8 +89,7 @@ namespace MiBud.Views.CreateServiceTicket
                     }
                 };
             }
-            MapSpan mapSpan = MapSpan.FromCenterAndRadius(viewModel.AllPins.FirstOrDefault().Position, Distance.FromKilometers(10));
-            map.MoveToRegion(mapSpan);
+
         }
 
 

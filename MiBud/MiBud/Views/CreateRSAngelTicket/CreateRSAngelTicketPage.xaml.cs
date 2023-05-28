@@ -5,6 +5,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Linq;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace MiBud.Views.CreateRSAngelTicket
@@ -23,6 +24,11 @@ namespace MiBud.Views.CreateRSAngelTicket
             BindingContext = viewModel = new CreateRSAngelTicketViewModel();
             this.selected_vehicle = selected_vehicle;
             services = new Services.ApiServices();
+            if (App.currentServiceLocation != null)
+            {
+                MapSpan mapSpan = MapSpan.FromCenterAndRadius(App.currentServiceLocation.Position, Distance.FromKilometers(10));
+                map.MoveToRegion(mapSpan);
+            }
         }
 
         protected override void OnAppearing()

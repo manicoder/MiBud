@@ -28,11 +28,11 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="140"/>
 
-                            <!--<RowDefinition>
+                            <RowDefinition>
                                 <RowDefinition.Height>
                                     <OnIdiom x:TypeArguments="GridLength" Tablet="250" Phone="180"/>
                                 </RowDefinition.Height>
-                            </RowDefinition>-->
+                            </RowDefinition>
                             <RowDefinition>
                                 <RowDefinition.Height>
                                     <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45"/>
@@ -105,7 +105,7 @@
                         </Frame>
                         <Label Grid.Column="2" Text="Walk-in" Style="{StaticResource lbl}" HorizontalTextAlignment="Center"/>
                     </Grid>-->
-                        <!--<maps:Map Grid.Row="1" x:Name="map" />-->
+                        <maps:Map Grid.Row="1" x:Name="map" />
                         <!--<Grid Grid.Row="5" ColumnSpacing="20" Padding="0,10,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -118,7 +118,7 @@
                         </Frame>
                         <Label Grid.Column="2" Text="Repair" Style="{StaticResource lbl}" HorizontalTextAlignment="Center"/>
                     </Grid>-->
-                        <Grid Grid.Row="1" ColumnSpacing="5" Padding="0,0,0,0">
+                        <Grid Grid.Row="2" ColumnSpacing="5" Padding="0,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -175,7 +175,7 @@
                                 </Button.Triggers>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="2">
+                        <Grid Grid.Row="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -189,9 +189,9 @@
                                    Style="{StaticResource lbl}"
                                    IsVisible="False"/>
                         </Grid>
-                        <Label Grid.Row="3" Text="Service Type" Style="{StaticResource lbl}" 
+                        <Label Grid.Row="4" Text="Service Type" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                        <Frame Grid.Row="4" Style="{StaticResource frame}" Padding="2">
+                        <Frame Grid.Row="5" Style="{StaticResource frame}" Padding="2">
                             <Grid ColumnSpacing="0" Padding="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -222,9 +222,9 @@
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </Frame>
-                        <Label Grid.Row="5" Text="Add Symptoms" Style="{StaticResource lbl}" 
+                        <Label Grid.Row="6" Text="Add Symptoms" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                        <CollectionView Grid.Row="6" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
+                        <CollectionView Grid.Row="7" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding symotomps_list_height}" >
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>

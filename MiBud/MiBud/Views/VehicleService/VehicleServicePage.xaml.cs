@@ -25,15 +25,24 @@ namespace MiBud.Views.VehicleService
             BindingContext = viewModel = new VehicleServiceViewModel(this, selected_vehicle);
             if (App.selectedIcon == "wikitek")
             {
+               // viewModel.selected_jobcard = "RSAngelMechanik";
                 img_connected_vehicle.IconImageSource = "blue.png";
             }
             else if (App.selectedIcon == "mobitek")
             {
+             ///   viewModel.selected_jobcard = "RSAngelMechanik";
+
                 img_connected_vehicle.IconImageSource = "orange.png";
             }
             else if (App.selectedIcon == "rsangel")
             {
+              //  viewModel.selected_jobcard = "RSAngelMechanik";
+
                 img_connected_vehicle.IconImageSource = "green.png";
+            }
+            else
+            {
+                img_connected_vehicle.IconImageSource = string.Empty;
             }
         }
 

@@ -21,6 +21,7 @@ using MiBud.Views;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
 using Android.Gms.Location;
+using ActivityCompat = Android.Support.V4.App.ActivityCompat;
 
 namespace MiBud.Droid
 {

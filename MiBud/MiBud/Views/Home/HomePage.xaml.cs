@@ -24,6 +24,8 @@ namespace MiBud.Views.Home
                 BindingContext = viewModel = new HomeViewModel(this, vehicle);
                 selected_vehicle_picture = App.selected_vehicle_picture;
                 img_toolbaritem.IconImageSource = "blue.png";
+                App.selectedIcon = string.Empty;
+                App.selected_vehicle_Service = string.Empty;
             }
             catch (System.Exception ex)
             {
@@ -42,7 +44,7 @@ namespace MiBud.Views.Home
         }
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if (selected_page == "wikitek")
+           if (selected_page == "wikitek")
             {
                 this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
             }
@@ -79,6 +81,7 @@ namespace MiBud.Views.Home
                         selected_page = "wikitek";
                         img_toolbaritem.IconImageSource = "blue.png";
                         App.selectedIcon = "wikitek";
+                        App.selected_vehicle_Service = "wikitekMechanik";
                         break;
 
                     case "mobitek":
@@ -87,6 +90,8 @@ namespace MiBud.Views.Home
                         selected_page = "mobitek";
                         img_toolbaritem.IconImageSource = "orange.png";
                         App.selectedIcon = "mobitek";
+                        App.selected_vehicle_Service = "mobitekMechanik";
+
                         break;
 
                     case "rsangel":
@@ -95,6 +100,8 @@ namespace MiBud.Views.Home
                         selected_page = "rsangel";
                         img_toolbaritem.IconImageSource = "green.png";
                         App.selectedIcon = "rsangel";
+                        App.selected_vehicle_Service = "RSAngelMechanik";
+
                         break;
 
                 }

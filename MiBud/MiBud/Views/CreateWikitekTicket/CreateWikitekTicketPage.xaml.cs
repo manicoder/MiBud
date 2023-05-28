@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace MiBud.Views.CreateWikitekTicket
@@ -31,6 +32,11 @@ namespace MiBud.Views.CreateWikitekTicket
             this.selected_vehicle = selected_vehicle;
 
             services = new Services.ApiServices();
+            if (App.currentServiceLocation != null)
+            {
+                MapSpan mapSpan = MapSpan.FromCenterAndRadius(App.currentServiceLocation.Position, Distance.FromKilometers(10));
+                map.MoveToRegion(mapSpan);
+            }
 
             MessagingCenter.Subscribe<SymptomsPopupPage, SymptomRtModel>(this, "selected_symptoms", async (sender, arg) =>
             {
