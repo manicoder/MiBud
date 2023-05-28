@@ -7,16 +7,18 @@
              x:Class="MiBud.Views.CreateServiceTicket.CreateServiceTicketPage"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              Title="Create Service Ticket">
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem x:Name="img_toolbaritem" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="60"/>
+                <!--<RowDefinition Height="60"/>-->
             </Grid.RowDefinitions>
-            <maps:Map Grid.Row="0" x:Name="map" IsVisible="True"/>
+ 
+            <maps:Map Grid.Row="0" x:Name="map" />
+ 
             <ListView Grid.Row="0" IsVisible="False"
                       ItemsSource="{Binding workshops}"
                       SelectedItem="{Binding selected_workshops,Mode=TwoWay}">
@@ -48,7 +50,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Grid.Row="1" 
+            <!--<Grid Grid.Row="1" 
                   BackgroundColor="{Binding tab_bg_color}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -100,7 +102,7 @@
                         <TapGestureRecognizer Tapped="MenuIcon_Tapped"/>
                     </Grid.GestureRecognizers>
                 </Grid>
-            </Grid>
+            </Grid>-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

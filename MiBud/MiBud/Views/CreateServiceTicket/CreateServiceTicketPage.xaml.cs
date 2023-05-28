@@ -27,7 +27,7 @@ namespace MiBud.Views.CreateServiceTicket
             InitializeComponent();
             BindingContext = viewModel = new CreateServiceTicketViewModel();
             this.selected_vehicle = selected_vehicle;
-            img_toolbaritem.IconImageSource = "blue.png";
+            //img_toolbaritem.IconImageSource = "blue.png";
 
             Position position = new Position(22.6949509, 75.8894909);
             //Pin pin = new Pin
@@ -41,6 +41,7 @@ namespace MiBud.Views.CreateServiceTicket
 
             Device.StartTimer(new TimeSpan(0, 0, 10), () =>
             {
+ 
                 // do something every 60 seconds
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -67,53 +68,44 @@ namespace MiBud.Views.CreateServiceTicket
             }
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(viewModel.AllPins.FirstOrDefault().Position, Distance.FromKilometers(10));
             map.MoveToRegion(mapSpan);
-        }
-
-        private void MenuIcon_Tapped(object sender, EventArgs e)
-        {
-            try
+ 
+            pin.Clicked += delegate
             {
-                var Id = sender as Grid;
-                string GirdClassId = Id.ClassId;
-                viewModel.wikitek_color = (Color)Application.Current.Resources["tab_unselect_color"];
-                viewModel.mobitek_color = (Color)Application.Current.Resources["tab_unselect_color"];
-                viewModel.rsangel_color = (Color)Application.Current.Resources["tab_unselect_color"];
-
-                img_wikitek.Scale = 1;
-                img_mobitek.Scale = 1;
-                img_rsangel.Scale = 1;
-
-                switch (GirdClassId)
+                if (App.selectedIcon == "wikitek")
                 {
-                    case "wikitek":
-                        viewModel.wikitek_color = (Color)Application.Current.Resources["theme_color"];
-                        img_wikitek.Scale = 1.4;
-                        selected_page = "wikitek";
-                        img_toolbaritem.IconImageSource = "blue.png";
-                        break;
-
-                    case "mobitek":
-                        viewModel.mobitek_color = (Color)Application.Current.Resources["theme_color"];
-                        img_mobitek.Scale = 1.4;
-                        selected_page = "mobitek";
-                        img_toolbaritem.IconImageSource = "orange.png";
-                        break;
-
-                    case "rsangel":
-                        viewModel.rsangel_color = (Color)Application.Current.Resources["theme_color"];
-                        img_rsangel.Scale = 1.4;
-                        selected_page = "rsangel";
-                        img_toolbaritem.IconImageSource = "green.png";
-                        break;
-
+                    this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
                 }
-            }
-            catch (Exception ex)
-            {
-            }
-        }
+                else if (App.selectedIcon == "mobitek")
+                {
+                    this.Navigation.PushAsync(new CreateMobitekTicketPage(selected_vehicle));
+                }
+                else if (App.selectedIcon == "rsangel")
+                {
+                    this.Navigation.PushAsync(new CreateRSAngelTicketPage(selected_vehicle));
+                }
+            }; 
+            //map.Pins.Add(pin);
+         }
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+
+
+
+
+        //private void MenuIcon_Tapped(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var Id = sender as Grid;
+        //        string GirdClassId = Id.ClassId;
+        //        viewModel.wikitek_color = (Color)Application.Current.Resources["tab_unselect_color"];
+        //        viewModel.mobitek_color = (Color)Application.Current.Resources["tab_unselect_color"];
+        //        viewModel.rsangel_color = (Color)Application.Current.Resources["tab_unselect_color"];
+
+        //        img_wikitek.Scale = 1;
+        //        img_mobitek.Scale = 1;
+        //        img_rsangel.Scale = 1;
+
+         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (selected_page == "wikitek")
             {
@@ -134,5 +126,53 @@ namespace MiBud.Views.CreateServiceTicket
         {
 
         }
+ 
+        //        switch (GirdClassId)
+        //        {
+        //            case "wikitek":
+        //                viewModel.wikitek_color = (Color)Application.Current.Resources["theme_color"];
+        //                img_wikitek.Scale = 1.4;
+        //                selected_page = "wikitek";
+        //                img_toolbaritem.IconImageSource = "blue.png";
+        //                break;
+
+        //            case "mobitek":
+        //                viewModel.mobitek_color = (Color)Application.Current.Resources["theme_color"];
+        //                img_mobitek.Scale = 1.4;
+        //                selected_page = "mobitek";
+        //                img_toolbaritem.IconImageSource = "orange.png";
+        //                break;
+
+        //            case "rsangel":
+        //                viewModel.rsangel_color = (Color)Application.Current.Resources["theme_color"];
+        //                img_rsangel.Scale = 1.4;
+        //                selected_page = "rsangel";
+        //                img_toolbaritem.IconImageSource = "green.png";
+        //                break;
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+        //}
+
+        //private void ToolbarItem_Clicked(object sender, EventArgs e)
+        //{
+        //    if(selected_page== "wikitek")
+        //    {
+        //        this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle,viewModel.selected_workshops));
+        //    }
+        //    else if(selected_page == "mobitek")
+        //    {
+        //        this.Navigation.PushAsync(new CreateMobitekTicketPage(selected_vehicle));
+        //    }
+        //    else if(selected_page == "rsangel")
+        //    {
+        //        this.Navigation.PushAsync(new CreateRSAngelTicketPage(selected_vehicle));
+        //    }
+        //    //this.Navigation.PushAsync(new CreateRSAngelTicketPage());
+        //}
+ 
     }
 }

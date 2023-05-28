@@ -23,14 +23,14 @@
     <NavigationPage.TitleView>
         <Grid ColumnDefinitions="*,42,1" VerticalOptions="FillAndExpand">
             <Label Text="My Vehicles" FontSize="17" TextColor="#FFFFFF" FontAttributes="Bold" VerticalTextAlignment="Center"/>
-            <Frame Grid.Column="1" Padding="0" CornerRadius="20">
+            <!--<Frame Grid.Column="1" Padding="0" CornerRadius="20">
                 <ImageButton BackgroundColor="Transparent"
                              Aspect="Fill"
                              HorizontalOptions="Center"
                              VerticalOptions="Center"
                              HeightRequest="42"
                             Source="{Binding selected_vehicle_picture,Converter={StaticResource image_converter}}"/>
-            </Frame>
+            </Frame>-->
 
         </Grid>
     </NavigationPage.TitleView>

@@ -30,11 +30,11 @@
                                 <OnIdiom x:TypeArguments="GridLength" Tablet="100" Phone="100"/>
                             </RowDefinition.Height>
                         </RowDefinition>
-                       <RowDefinition>
+                       <!--<RowDefinition>
                             <RowDefinition.Height>
                                 <OnIdiom x:TypeArguments="GridLength" Tablet="250" Phone="180"/>
                             </RowDefinition.Height>
-                        </RowDefinition>
+                        </RowDefinition>-->
                         <RowDefinition>
                             <RowDefinition.Height>
                                 <OnIdiom x:TypeArguments="GridLength" Tablet="35" Phone="40"/>
@@ -98,8 +98,8 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    <maps:Map Grid.Row="1" x:Name="map" />
-                    <Grid Grid.Row="2">
+                    <!--<maps:Map Grid.Row="1" x:Name="map" />-->
+                    <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
@@ -108,7 +108,7 @@
                         <Label Grid.Column="1" Text="Immediate" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="Center"/>
                     </Grid>
-                    <Grid Grid.Row="3" ColumnSpacing="10">
+                    <Grid Grid.Row="2" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -164,9 +164,9 @@
                         </Frame>
                     </Grid>
                  
-                    <Label Grid.Row="4" Text="Add Symptoms" Style="{StaticResource lbl}" 
+                    <Label Grid.Row="3" Text="Add Symptoms" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                    <CollectionView Grid.Row="5" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
+                    <CollectionView Grid.Row="4" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding symotomps_list_height}" >
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
@@ -264,9 +264,9 @@
                         </CollectionView.EmptyView>
                     </CollectionView>
 
-                    <Label Grid.Row="6" Text="Add Services" Style="{StaticResource lbl}" 
+                    <Label Grid.Row="5" Text="Add Services" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                    <CollectionView Grid.Row="7" ItemsSource="{Binding services_list}" ItemSizingStrategy="MeasureAllItems"
+                    <CollectionView Grid.Row="6" ItemsSource="{Binding services_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding services_list_height}" >
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
