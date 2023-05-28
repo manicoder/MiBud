@@ -48,7 +48,7 @@ namespace MiBud.Views.Home
         {
             if (selected_page == "wikitek")
             {
-                
+
 
                 this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
             }
@@ -87,6 +87,7 @@ namespace MiBud.Views.Home
                         App.selectedIcon = "wikitek";
                         App.selected_vehicle_Service = "wikitekMechanik";
                         App.selectedColor = "blue";
+                        ChangeStatusColor(Color.Blue);
                         break;
 
                     case "mobitek":
@@ -97,6 +98,7 @@ namespace MiBud.Views.Home
                         App.selectedIcon = "mobitek";
                         App.selected_vehicle_Service = "mobitekMechanik";
                         App.selectedColor = "orange";
+                        ChangeStatusColor(Color.Orange);
                         break;
 
                     case "rsangel":
@@ -107,6 +109,7 @@ namespace MiBud.Views.Home
                         App.selectedIcon = "rsangel";
                         App.selected_vehicle_Service = "RSAngelMechanik";
                         App.selectedColor = "green";
+                        ChangeStatusColor(Color.Green);
                         break;
 
                 }
@@ -114,6 +117,16 @@ namespace MiBud.Views.Home
             catch (Exception ex)
             {
             }
+        }
+
+        private static void ChangeStatusColor(Color color)
+        {
+            var statusbar = DependencyService.Get<IStatusBarPlatformSpecific>();
+            statusbar.SetStatusBarColor(color);
+
+            var mdPage = Application.Current.MainPage as MasterDetailPage;
+            var navPage = mdPage.Detail as NavigationPage;
+            navPage.BarBackgroundColor = color;
         }
     }
 }

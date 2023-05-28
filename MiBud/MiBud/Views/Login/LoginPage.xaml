@@ -100,13 +100,13 @@
                         </Label>
                     </StackLayout>
                 </Frame>
-                <Frame Grid.Row="2" Style="{StaticResource frame}"  BackgroundColor="Gray">
-                    <StackLayout VerticalOptions="CenterAndExpand" Orientation="Vertical" >
-                        <Label Grid.Column="1" Text="Or Login With OTP" TextColor="White" HeightRequest="50" FontSize="20" FontFamily="{DynamicResource Material}" 
+
+                <StackLayout Grid.Row="2" VerticalOptions="CenterAndExpand" Orientation="Vertical" >
+                        <Label Grid.Column="1" Text="Or Login With OTP" TextColor="#000" HeightRequest="50" FontSize="16" FontFamily="{DynamicResource Material}" 
                                 HorizontalTextAlignment="Center"
                                VerticalTextAlignment="Center"/>
                     </StackLayout>
-                </Frame>
+                 
                 <Frame Grid.Row="3" Style="{StaticResource frame}">
                     <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
                         <Label Grid.Column="1" Text="&#xf011c;" FontSize="26" FontFamily="{DynamicResource Material}" 

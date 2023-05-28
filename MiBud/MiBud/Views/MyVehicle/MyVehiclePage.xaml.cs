@@ -15,7 +15,20 @@ namespace MiBud.Views.MyVehicle
             InitializeComponent();
             BindingContext = viewModel = new MyVehicleViewModel(this);
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ChangeStatusColor(Color.Orange);
+        }
+        private static void ChangeStatusColor(Color color)
+        {
+            var statusbar = DependencyService.Get<IStatusBarPlatformSpecific>();
+            statusbar.SetStatusBarColor(color);
 
+            var mdPage = Application.Current.MainPage as MasterDetailPage;
+            var navPage = mdPage.Detail as NavigationPage;
+            navPage.BarBackgroundColor = color;
+        }
         //private async void action_clicked(object sender, EventArgs e)
         //{
         //    //await Navigation.PushAsync(new JobCardDetailPage(null, "EntryCheckPage"));
