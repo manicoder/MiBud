@@ -6,6 +6,7 @@ using MiBud.Views.CreateWikitekTicket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,17 +30,43 @@ namespace MiBud.Views.CreateServiceTicket
             img_toolbaritem.IconImageSource = "blue.png";
 
             Position position = new Position(22.6949509, 75.8894909);
-            Pin pin = new Pin
-            {
-                Label = "Santa Cruz",
-                Address = "The city with a boardwalk",
-                Type = PinType.Place,
-                Position = position
-            };
-            map.Pins.Add(pin);
-            MapSpan mapSpan = MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(0.444));
-            map.MoveToRegion(mapSpan);
+            //Pin pin = new Pin
+            //{
+            //    Label = "Santa Cruz",
+            //    Address = "The city with a boardwalk",
+            //    Type = PinType.Place,
+            //    Position = position
+            //};
             //map.Pins.Add(pin);
+
+            Device.StartTimer(new TimeSpan(0, 0, 10), () =>
+            {
+                // do something every 60 seconds
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    GetWorkshops();
+                });
+                return true; // runs again, or false to stop
+            });
+
+
+        }
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await GetWorkshops();
+        }
+
+        private async Task GetWorkshops()
+        {
+            await viewModel.GetWorkshop();
+           
+            foreach (var item in viewModel.AllPins)
+            {
+                map.Pins.Add(item);
+            }
+            MapSpan mapSpan = MapSpan.FromCenterAndRadius(viewModel.AllPins.FirstOrDefault().Position, Distance.FromKilometers(10));
+            map.MoveToRegion(mapSpan);
         }
 
         private void MenuIcon_Tapped(object sender, EventArgs e)
@@ -88,19 +115,24 @@ namespace MiBud.Views.CreateServiceTicket
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if(selected_page== "wikitek")
+            if (selected_page == "wikitek")
             {
-                this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle,viewModel.selected_workshops));
+                this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
             }
-            else if(selected_page == "mobitek")
+            else if (selected_page == "mobitek")
             {
                 this.Navigation.PushAsync(new CreateMobitekTicketPage(selected_vehicle));
             }
-            else if(selected_page == "rsangel")
+            else if (selected_page == "rsangel")
             {
                 this.Navigation.PushAsync(new CreateRSAngelTicketPage(selected_vehicle));
             }
             //this.Navigation.PushAsync(new CreateRSAngelTicketPage());
+        }
+
+        private void AddPinsToMap()
+        {
+
         }
     }
 }

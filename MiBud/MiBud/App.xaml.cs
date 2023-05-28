@@ -28,11 +28,14 @@ namespace MiBud
         public static string dongle_type = string.Empty;
         public static string dongle = string.Empty;
         public static int? country_id;
+        public static string selected_vehicle = string.Empty;
+
         public static ObservableCollection<BluetoothDevicesModel> bluetooth_devices = new ObservableCollection<BluetoothDevicesModel>();
 
         //public static PaymentResponseModel paymentResponseModel = new PaymentResponseModel();
         public static LoginResponse user = new LoginResponse();
         public static LoginModel login_model = new LoginModel();
+
 
         public App()
         {

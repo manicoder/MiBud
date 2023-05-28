@@ -63,6 +63,7 @@ namespace MiBud.ViewModels
             set
             {
                 _selected_vehicle = value;
+                App.selected_vehicle = value.id;
                 OnPropertyChanged("selected_vehicle");
             }
         }

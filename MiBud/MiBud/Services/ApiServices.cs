@@ -861,7 +861,7 @@ namespace MiBud.Services
             }
         }
 
-        public async Task<WorkshopModel> GetWorkshop(string token)
+        public async Task<WorkshopModel> GetWorkshop(string token, string userType)
         {
             HttpResponseMessage httpResponse = new HttpResponseMessage();
             WorkshopModel model = new WorkshopModel();
@@ -872,7 +872,7 @@ namespace MiBud.Services
 
             try
             {
-                url = $"{base_url}workshops/workshops-get/";
+                url = $"{base_url}workshops/workshops-get/?user_type=" + userType;
                 httpResponse = await client.GetAsync(url);
 
                 if (httpResponse.StatusCode != System.Net.HttpStatusCode.OK)
@@ -1020,7 +1020,7 @@ namespace MiBud.Services
             HttpResponseMessage http_response = new HttpResponseMessage();
             JobcardModel model = new JobcardModel();
             string Data = string.Empty;
-            string url = base_url + $"analyze/jobcard-details";
+            string url = base_url + $"analyze/jobcard-details/?registration_id=" + App.selected_vehicle;
             try
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
@@ -1070,7 +1070,7 @@ namespace MiBud.Services
                 model.status = true;
                 return model;//.results.FirstOrDefault(x => x.id == id);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 model.status = false;
                 model.message = ex.Message;

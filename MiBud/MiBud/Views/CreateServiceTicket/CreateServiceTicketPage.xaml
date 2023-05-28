@@ -16,8 +16,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            <maps:Map Grid.Row="0" x:Name="map" IsVisible="False"/>
-            <ListView Grid.Row="0" 
+            <maps:Map Grid.Row="0" x:Name="map" IsVisible="True"/>
+            <ListView Grid.Row="0" IsVisible="False"
                       ItemsSource="{Binding workshops}"
                       SelectedItem="{Binding selected_workshops,Mode=TwoWay}">
                 <ListView.ItemTemplate>
