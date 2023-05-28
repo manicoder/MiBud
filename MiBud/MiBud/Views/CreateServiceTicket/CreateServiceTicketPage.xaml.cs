@@ -21,7 +21,7 @@ namespace MiBud.Views.CreateServiceTicket
     {
         CreateServiceTicketViewModel viewModel;
         Vehicle selected_vehicle;
-        string selected_page = "wikitek";
+        string selected_page = App.selectedIcon;
         public CreateServiceTicketPage(Vehicle selected_vehicle)
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace MiBud.Views.CreateServiceTicket
             this.selected_vehicle = selected_vehicle;
             //img_toolbaritem.IconImageSource = "blue.png";
 
-            Position position = new Position(22.6949509, 75.8894909);
+            //Position position = new Position(22.6949509, 75.8894909);
             //Pin pin = new Pin
             //{
             //    Label = "Santa Cruz",
@@ -41,11 +41,11 @@ namespace MiBud.Views.CreateServiceTicket
 
             Device.StartTimer(new TimeSpan(0, 0, 10), () =>
             {
- 
+
                 // do something every 60 seconds
-                Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    GetWorkshops();
+                    await GetWorkshops();
                 });
                 return true; // runs again, or false to stop
             });
@@ -57,35 +57,32 @@ namespace MiBud.Views.CreateServiceTicket
             base.OnAppearing();
             await GetWorkshops();
         }
-
         private async Task GetWorkshops()
         {
             await viewModel.GetWorkshop();
-           
-            foreach (var item in viewModel.AllPins)
+
+            foreach (var pin in viewModel.AllPins)
             {
-                map.Pins.Add(item);
+                map.Pins.Add(pin);
+                pin.Clicked += delegate
+                {
+                    if (App.selectedIcon == "wikitek")
+                    {
+                        this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
+                    }
+                    else if (App.selectedIcon == "mobitek")
+                    {
+                        this.Navigation.PushAsync(new CreateMobitekTicketPage(selected_vehicle));
+                    }
+                    else if (App.selectedIcon == "rsangel")
+                    {
+                        this.Navigation.PushAsync(new CreateRSAngelTicketPage(selected_vehicle));
+                    }
+                };
             }
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(viewModel.AllPins.FirstOrDefault().Position, Distance.FromKilometers(10));
             map.MoveToRegion(mapSpan);
- 
-            pin.Clicked += delegate
-            {
-                if (App.selectedIcon == "wikitek")
-                {
-                    this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
-                }
-                else if (App.selectedIcon == "mobitek")
-                {
-                    this.Navigation.PushAsync(new CreateMobitekTicketPage(selected_vehicle));
-                }
-                else if (App.selectedIcon == "rsangel")
-                {
-                    this.Navigation.PushAsync(new CreateRSAngelTicketPage(selected_vehicle));
-                }
-            }; 
-            //map.Pins.Add(pin);
-         }
+        }
 
 
 
@@ -105,7 +102,7 @@ namespace MiBud.Views.CreateServiceTicket
         //        img_mobitek.Scale = 1;
         //        img_rsangel.Scale = 1;
 
-         private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (selected_page == "wikitek")
             {
@@ -126,7 +123,7 @@ namespace MiBud.Views.CreateServiceTicket
         {
 
         }
- 
+
         //        switch (GirdClassId)
         //        {
         //            case "wikitek":
@@ -173,6 +170,6 @@ namespace MiBud.Views.CreateServiceTicket
         //    }
         //    //this.Navigation.PushAsync(new CreateRSAngelTicketPage());
         //}
- 
+
     }
 }
