@@ -105,7 +105,7 @@ namespace MiBud.ViewModels
             }
             else if (App.selectedColor == "orange")
             {
-                selectedBgColor = Color.Orange;
+                selectedBgColor = (Color)Application.Current.Resources["theme_color"];
             }
             else if (App.selectedColor == "green")
             {
