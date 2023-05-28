@@ -85,6 +85,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Dependencies\Bluetooth_Android.cs" />
     <Compile Include="Dependencies\DeviceMacAddress.cs" />
     <Compile Include="Dependencies\ImageStreamConverter.cs" />
