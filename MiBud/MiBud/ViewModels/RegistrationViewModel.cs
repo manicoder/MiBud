@@ -291,6 +291,10 @@ namespace MiBud.ViewModels
         [Obsolete]
         public void InitializeCommands()
         {
+            OpenPrivacyPolicyCommand = new Command(async (obj) =>
+            {
+                GoToPrivacyPolicyPage();
+            });
 
             MessagingCenter.Subscribe<CountyViewModel, RsUserTypeCountry>(this, "selected_country_registrationVM", async (sender, arg) =>
             {
@@ -405,6 +409,15 @@ namespace MiBud.ViewModels
                     await Rg.Plugins.Popup.Services.PopupNavigation.PushAsync(new PopupPages.CountyPopupPage());
                 }
             });
+        }
+
+        async void GoToPrivacyPolicyPage()
+        {
+            using (UserDialogs.Instance.Loading("Loading...", null, null, true, MaskType.Black))
+            {
+                await Task.Delay(200);
+                await navigationService.PushAsync(new Views.PrivacyPolicy.PrivacyPolicyPage());
+            }
         }
 
         public async Task UserRegistration()
@@ -581,6 +594,7 @@ namespace MiBud.ViewModels
         #endregion
 
         #region ICommands
+        public ICommand OpenPrivacyPolicyCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
         public ICommand CountryCommand { get; set; }
         //public ICommand RSAgentCommand { get; set; }
