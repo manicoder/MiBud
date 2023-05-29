@@ -21,25 +21,25 @@
                 </Grid.ColumnDefinitions>
                 <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource frame}">
                     <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
-                        <local:CustomEntry Text="{Binding otp1}" 
+                        <local:CustomEntry x:Name="otp1" Text="{Binding otp1}"  TextChanged="otp1_TextChanged" 
                                            MaxLength="1" Style="{StaticResource ent}" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
                 <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource frame}">
                     <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
-                        <local:CustomEntry Text="{Binding otp2}" 
+                        <local:CustomEntry x:Name="otp2" Text="{Binding otp2}"   TextChanged="otp2_TextChanged" 
                                            MaxLength="1" Style="{StaticResource ent}" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
                 <Frame Grid.Row="0" Grid.Column="2" Style="{StaticResource frame}">
                     <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
-                        <local:CustomEntry Text="{Binding otp3}" 
+                        <local:CustomEntry x:Name="otp3" Text="{Binding otp3}"  TextChanged="otp3_TextChanged"
                                            MaxLength="1" Style="{StaticResource ent}" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
                 <Frame Grid.Row="0" Grid.Column="3" Style="{StaticResource frame}">
                     <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
-                        <local:CustomEntry Text="{Binding otp4}" 
+                        <local:CustomEntry x:Name="otp4" Text="{Binding otp4}" 
                                            MaxLength="1" Style="{StaticResource ent}" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>

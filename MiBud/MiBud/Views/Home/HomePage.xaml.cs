@@ -22,7 +22,7 @@ namespace MiBud.Views.Home
                 InitializeComponent();
                 BindingContext = viewModel = new HomeViewModel(this, vehicle);
                 selected_vehicle_picture = App.selected_vehicle_picture;
-                img_toolbaritem.IconImageSource = "blue.png";
+                //img_toolbaritem.IconImageSource = "blue.png";
                 App.selectedIcon = string.Empty;
                 App.selected_vehicle_Service = string.Empty;
                 App.currentServiceLocation = null;
@@ -83,7 +83,7 @@ namespace MiBud.Views.Home
                         viewModel.wikitek_color = (Color)Application.Current.Resources["theme_color"];
                         img_wikitek.Scale = 1.4;
                         selected_page = "wikitek";
-                        img_toolbaritem.IconImageSource = "blue.png";
+                        //img_toolbaritem.IconImageSource = "blue.png";
                         App.selectedIcon = "wikitek";
                         App.selected_vehicle_Service = "wikitekMechanik";
                         App.selectedColor = "blue";
@@ -94,7 +94,7 @@ namespace MiBud.Views.Home
                         viewModel.mobitek_color = (Color)Application.Current.Resources["theme_color"];
                         img_mobitek.Scale = 1.4;
                         selected_page = "mobitek";
-                        img_toolbaritem.IconImageSource = "orange.png";
+                        //img_toolbaritem.IconImageSource = "orange.png";
                         App.selectedIcon = "mobitek";
                         App.selected_vehicle_Service = "mobitekMechanik";
                         App.selectedColor = "orange";
@@ -105,7 +105,7 @@ namespace MiBud.Views.Home
                         viewModel.rsangel_color = (Color)Application.Current.Resources["theme_color"];
                         img_rsangel.Scale = 1.4;
                         selected_page = "rsangel";
-                        img_toolbaritem.IconImageSource = "green.png";
+                        //img_toolbaritem.IconImageSource = "green.png";
                         App.selectedIcon = "rsangel";
                         App.selected_vehicle_Service = "RSAngelMechanik";
                         App.selectedColor = "green";
