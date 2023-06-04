@@ -163,7 +163,7 @@ namespace MiBud.ViewModels
             {
             }
         });
-        
+
         public ICommand AddNewVehicleServiceCommand => new Command(async (obj) =>
         {
             await page.Navigation.PushAsync(new Views.CreateServiceTicket.CreateServiceTicketPage(selected_vehicle));

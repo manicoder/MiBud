@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace MiBud.Models
@@ -14,7 +15,7 @@ namespace MiBud.Models
         public string message { get; set; }
     }
 
-    public class JobcardResult
+    public class JobcardResult : INotifyPropertyChanged
     {
         public string id { get; set; }
         public string job_card_name { get; set; }
@@ -31,6 +32,16 @@ namespace MiBud.Models
         public string pickup { get; set; }
         public string drop { get; set; }
         public string service_type { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+
     }
 
     public class JobcardSymptom
@@ -132,7 +143,7 @@ namespace MiBud.Models
         public string drop { get; set; }
         public string service_type { get; set; }
 
-        public List<JobcardSymptomModel> jobcard_symptom { get;set;}
+        public List<JobcardSymptomModel> jobcard_symptom { get; set; }
         public List<JobcardPickupdrop> jobcard_pickupdrop { get; set; }
     }
 
