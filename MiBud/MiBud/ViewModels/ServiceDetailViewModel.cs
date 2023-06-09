@@ -43,9 +43,16 @@ namespace MiBud.ViewModels
         {
             try
             {
+                isVisibleservices = false;
+                isVisiblesymptioms = false;
+                addservices = string.Empty;
+                symptioms = string.Empty;
+                addspareparts = string.Empty;
                 apiServices = new ApiServices();
-                this.jobcard_detail = jobcard_detail;
+                BindData(jobcard_detail);
+                //this.jobcard_detail = jobcard_detail;
                 SetActionButtonStatus();
+                InitializeCommands();
 
                 //Device.BeginInvokeOnMainThread(async () =>
                 //{
@@ -62,7 +69,79 @@ namespace MiBud.ViewModels
             }
         }
 
+        public void BindData(JobcardResult jobcard_detail)
+        {
+            this.jobcard_detail = jobcard_detail;
+
+        }
+
         #region Properties
+        private string _symptioms;
+        public string symptioms
+        {
+            get => _symptioms;
+            set
+            {
+                _symptioms = value;
+                OnPropertyChanged("symptioms");
+            }
+        }
+
+        private string _addservices;
+        public string addservices
+        {
+            get => _addservices;
+            set
+            {
+                _addservices = value;
+                OnPropertyChanged("addservices");
+            }
+        }
+
+        private string _addspareparts;
+        public string addspareparts
+        {
+            get => _addspareparts;
+            set
+            {
+                _addspareparts = value;
+                OnPropertyChanged("addspareparts");
+            }
+        }
+
+        private bool _isVisiblesymptioms;
+        public bool isVisiblesymptioms
+        {
+            get => _isVisiblesymptioms;
+            set
+            {
+                _isVisiblesymptioms = value;
+                OnPropertyChanged("isVisiblesymptioms");
+            }
+        }
+
+        private bool _isVisibleservices;
+        public bool isVisibleservices
+        {
+            get => _isVisibleservices;
+            set
+            {
+                _isVisibleservices = value;
+                OnPropertyChanged("isVisibleservices");
+            }
+        }
+
+        private bool _isVisiblespareparts;
+        public bool isVisiblespareparts
+        {
+            get => _isVisiblespareparts;
+            set
+            {
+                _isVisiblespareparts = value;
+                OnPropertyChanged("isVisiblespareparts");
+            }
+        }
+
         public double description_height
         {
             get => _description_height;
@@ -247,9 +326,93 @@ namespace MiBud.ViewModels
             }
         }
         #endregion
+        [Obsolete]
+        public void InitializeCommands()
+        {
+            IsAddSymptiomsCommand = new Command(async (obj) =>
+            {
+                isVisiblesymptioms = true;
+            });
 
+            SubmitSymptiomsCommand = new Command(async (obj) =>
+            {
+                isVisiblesymptioms = false;
+                symptom symptom = new symptom();
+                symptom.id = 4;
+                symptom.symptom_name = "temp";
+
+                JobcardSymptom obj1 = new JobcardSymptom();
+                obj1.customer_check = "NO";
+                obj1.entry_check = "NO";
+                obj1.exit_check = "NO";
+                obj1.service_check = "NO";
+                obj1.id = 5;
+                obj1.status = "NO";
+                obj1.job_card = "NO";
+                obj1.symptom = symptom;
+                symptioms = string.Empty;
+                this.jobcard_detail.jobcard_symptom.Add(obj1);
+                BindData(jobcard_detail);
+                this.jobcard_detail.OnPropertyChanged("jobcard_symptom");
+            });
+
+            IsAddServiceCommand = new Command(async (obj) =>
+            {
+                isVisibleservices = true;
+            });
+
+            SubmitServiceCommand = new Command(async (obj) =>
+            {
+                isVisibleservices = false;
+                Service symptom = new Service();
+                symptom.id = 4;
+                symptom.service_name = "temp";
+
+                JobcardService obj1 = new JobcardService();
+                obj1.customer_check = "NO";
+                obj1.entry_check = "NO";
+                obj1.exit_check = "NO";
+                obj1.service_check = "NO";
+                obj1.id = "5";
+                obj1.status = "NO";
+                obj1.job_card = "NO";
+                obj1.service = symptom;
+                addservices = string.Empty;
+                this.jobcard_detail.jobcard_service.Add(obj1);
+                BindData(jobcard_detail);
+                this.jobcard_detail.OnPropertyChanged("jobcard_service");
+            });
+
+            IsAddSparePartsCommand = new Command(async (obj) =>
+            {
+                isVisiblespareparts = true;
+            });
+
+            SubmitSparePartsCommand = new Command(async (obj) =>
+            {
+                isVisiblespareparts = false;
+                Sparepart symptom = new Sparepart();
+                symptom.id = 4;
+                symptom.sparepart_no = "temp";
+
+                JobcardSparepart obj1 = new JobcardSparepart();
+                obj1.customer_check = "NO";
+                obj1.entry_check = "NO";
+                obj1.exit_check = "NO";
+                obj1.service_check = "NO";
+                obj1.id = "5";
+                obj1.status = "NO";
+                obj1.job_card = "NO";
+                obj1.sparepart = symptom;
+                addspareparts = string.Empty;
+                this.jobcard_detail.jobcard_sparepart.Add(obj1);
+                BindData(jobcard_detail);
+                this.jobcard_detail.OnPropertyChanged("jobcard_sparepart");
+            });
+        }
 
         #region Methods
+
         public async Task SetActionButtonStatus()
         {
             try
@@ -940,6 +1103,15 @@ namespace MiBud.ViewModels
             await apiServices.PickupReject(Preferences.Get("token", null), jobcard_detail.id);
             show_cost_view = false;
         });
+
+        public ICommand IsAddSymptiomsCommand { get; set; }
+        public ICommand SubmitSymptiomsCommand { get; set; }
+
+        public ICommand IsAddServiceCommand { get; set; }
+        public ICommand SubmitServiceCommand { get; set; }
+
+        public ICommand IsAddSparePartsCommand { get; set; }
+        public ICommand SubmitSparePartsCommand { get; set; }
         #endregion
     }
 }

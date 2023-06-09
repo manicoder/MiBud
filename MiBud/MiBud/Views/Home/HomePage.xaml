@@ -5,9 +5,9 @@
              xmlns:converter="clr-namespace:MiBud.Converters"
              BackgroundColor="{StaticResource page_bg_color}"
              Title="Dashboard">
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem x:Name="img_toolbaritem" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ImageSourceConverter x:Key="image_converter" />
@@ -107,7 +107,7 @@
                           RowSpacing="10"
                           ColumnSpacing="0">
                         <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,Auto" RowSpacing="2">
-                            <ImageButton x:Name="veh_service" Source="ic_veh_service" 
+                            <ImageButton x:Name="veh_service" Source="ic_daignose" 
                                          BackgroundColor="{StaticResource theme_color}" 
                                          HorizontalOptions="Center" 
                                          VerticalOptions="Center" 
@@ -115,9 +115,9 @@
                                          WidthRequest="60" 
                                          CornerRadius="50" 
                                          Padding="15"
-                                         Command="{Binding VehicleServiceCommand}" CommandParameter="{x:Reference veh_service}">
+                                        >
                             </ImageButton>
-                            <Label Grid.Row="1" Text="Vehicle Service" 
+                            <Label Grid.Row="1" Text="Self Diagnose" 
                            FontSize="17"
                            Style="{StaticResource lbl}" 
                            FontAttributes="Bold"
