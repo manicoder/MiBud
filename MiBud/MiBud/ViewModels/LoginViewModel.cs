@@ -284,7 +284,9 @@ namespace MiBud.ViewModels
 
         public async Task GetMacId()
         {
-            mac_id = "6E285B000000";//await device_mac_id.GetMacAddress();
+            mac_id = "6E285B000000"; // await  device_mac_id.GetMacAddress();
+                //"6E285B000000";
+             
         }
 
         public async Task<bool> Validation()

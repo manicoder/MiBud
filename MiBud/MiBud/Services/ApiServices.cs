@@ -1020,7 +1020,8 @@ namespace MiBud.Services
             HttpResponseMessage http_response = new HttpResponseMessage();
             JobcardModel model = new JobcardModel();
             string Data = string.Empty;
-            string url = base_url + $"analyze/jobcard-details/?registration_id=" + App.selected_vehicle;
+            string url = base_url + $"analyze/jobcard-details/?registration_id=" + App.selected_vehicle
+                + "&user_type=" + App.selected_vehicle_Service;
             try
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
