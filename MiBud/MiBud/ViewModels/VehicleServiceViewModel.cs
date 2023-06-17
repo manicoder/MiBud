@@ -156,8 +156,9 @@ namespace MiBud.ViewModels
 
             try
             {
-                selected_jobcard = (JobcardResult)obj;
-                await page.Navigation.PushAsync(new Views.VehicleService.ServiceDetailPage(selected_jobcard));
+                App.selected_jobcard = (JobcardResult)obj;
+                //await page.Navigation.PushAsync(new Views.VehicleService.ServiceDetailPage(selected_jobcard));
+                await page.Navigation.PushAsync(new Views.RSManagerSection.RSManagerSection());
             }
             catch (Exception ex)
             {

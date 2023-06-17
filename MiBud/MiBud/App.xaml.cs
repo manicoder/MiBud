@@ -15,6 +15,7 @@ namespace MiBud
 {
     public partial class App : Application
     {
+        public static JobcardResult selected_jobcard;
         public static bool bt_available = true;
         public static bool dongle_connected = false;
         public static string selected_vehicle_picture = string.Empty;

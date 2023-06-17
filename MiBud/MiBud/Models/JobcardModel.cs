@@ -27,7 +27,7 @@ namespace MiBud.Models
         public List<JobcardSymptom> jobcard_symptom { get; set; }
         public List<JobcardService> jobcard_service { get; set; }
         public List<JobcardSparepart> jobcard_sparepart { get; set; }
-        public List<object> jobcard_pickupdrop { get; set; }
+        public List<JobcardPickupdrop> jobcard_pickupdrop { get; set; }
         public List<object> jobcard_entryexit { get; set; }
         public string pickup { get; set; }
         public string drop { get; set; }

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="MiBud.Views.RSManagerSection.RSManagerSection"
+             Title="RS Manager Section">
+    <ContentPage.Content>
+        <Grid>
+            <maps:Map x:Name="map" BackgroundColor="White"/>
+            <StackLayout x:Name="customerPanel"  HeightRequest="80" VerticalOptions="End" BackgroundColor="#ffffff">
+                <ImageButton Source="ic_up.png" x:Name="ic_up_button" HorizontalOptions="Center"  BackgroundColor="White" BorderColor="White" Clicked="ImageButton_Clicked" WidthRequest="30" HeightRequest="30"/>
+                <ImageButton Source="ic_down.png" x:Name="ic_down_button" HorizontalOptions="Center"  BackgroundColor="White" BorderColor="White" Clicked="ImageButton_Clicked" WidthRequest="30" HeightRequest="30"/>
+                <StackLayout  BackgroundColor="White" Padding="10,0,10,10" VerticalOptions="FillAndExpand">
+                    <StackLayout x:Name="actionButtons" VerticalOptions="EndAndExpand" Grid.Row="0">
+                        <Grid VerticalOptions="EndAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Row="2" Grid.Column="0">
+                                <Label x:Name="lblJobID"  Text="JobID" Grid.Row="0" Grid.Column="0"></Label>
+                                <Label x:Name="lblVehicleRegNo"  Text="Vehicle Reg No" Grid.Row="1" Grid.Column="0"></Label>
+                                <Label x:Name="lblTechnicianName" Text="Technicnan Name" Grid.Row="2" Grid.Column="0"></Label>
+                                <Label x:Name="lblStatus" Text="Status" Grid.Row="3" Grid.Column="0"></Label>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Button  Text="Approve"  HorizontalOptions="Center" Style="{StaticResource btn}" Command="{Binding ApproveCommand}"/>
+                                <Button  Text="Reject"  HorizontalOptions="Center" Style="{StaticResource btn}" Command="{Binding RejectCommand}"/>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                    <Grid VerticalOptions="End" Grid.Row="1" x:Name="listItem" IsVisible="true">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblJobID1"  Text="JobID" Grid.Row="0" Grid.Column="0"></Label>
+                        <Label x:Name="lblStatus1" Text="Status" Grid.Row="0" HorizontalOptions="EndAndExpand" Grid.Column="1"></Label>
+                        <Label x:Name="lblVehicleRegNo1"  Text="Vehicle Reg No" Grid.Row="1" Grid.Column="0"></Label>
+                        <Label x:Name="lblTechnicianName1" Text="Technicnan Name" HorizontalOptions="EndAndExpand" Grid.Row="1" Grid.Column="1"></Label>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -613,6 +613,92 @@ namespace MiBud.Services
             }
         }
 
+        public async Task<ErroMsg> ApproveTransport(ApproveModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/approved-transport/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+        public async Task<ErroMsg> ClosedByCustomer(ApproveModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/closedby-customer/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+        public async Task<ErroMsg> RejectedTransport(RejectModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/rejected-transport/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+        public async Task<ErroMsg> ClosedDisapproved(RejectModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/closed-disapproved/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+
+
         public async Task<VehicleModel> PickupApproved(string token, string jobcard_id)
         {
             HttpResponseMessage httpResponse = new HttpResponseMessage();
