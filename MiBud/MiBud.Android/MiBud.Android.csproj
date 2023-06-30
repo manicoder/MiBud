@@ -66,6 +66,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>2.0.0.14</Version>
     </PackageReference>
@@ -91,6 +94,7 @@
     <Compile Include="Dependencies\ImageStreamConverter.cs" />
     <Compile Include="Dependencies\VersionAndBuildNumber.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MainApplication.cs" />
     <Compile Include="Receivers\BluetoothDeviceReceiver.cs" />
     <Compile Include="Renders\CustomDatePickerRenderer.cs" />
     <Compile Include="Renders\CustomEditorRenderer.cs" />
@@ -104,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\materialdesignicons-webfont.ttf" />
+    <None Include="..\..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

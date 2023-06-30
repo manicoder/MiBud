@@ -15,6 +15,7 @@ namespace MiBud.Models
         public bool success { get; set; }
         public HttpStatusCode status_code { get; set; }
         public List<VehicleModelResult> results { get; set; }
+        public List<VehicleModelResult> data { get; set; }
     }
 
     public class VehicleModelResult : BaseViewModel

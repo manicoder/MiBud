@@ -68,7 +68,7 @@
                         <Label Grid.Column="1" Text="&#xF0013;" FontSize="28" FontFamily="{DynamicResource Material}" 
                                TextColor="{StaticResource theme_color}" HorizontalTextAlignment="End"
                                VerticalTextAlignment="Center"/>
-                        <local:CustomEntry Text="{Binding email}" Placeholder="Enter Registered Mobile" 
+                        <local:CustomEntry Text="{Binding email}" Placeholder="Enter User Id" 
                                            Style="{StaticResource ent}"
                                            Keyboard="Email">
                             <Entry.Behaviors>

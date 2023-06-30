@@ -111,6 +111,7 @@ namespace MiBud.ViewModels
             }
         }
 
+
         #region Methods
 
         public async Task GetVehicleBrandList(int segment_id)

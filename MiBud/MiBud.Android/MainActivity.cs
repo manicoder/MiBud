@@ -21,7 +21,8 @@ using MiBud.Views;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
 using Android.Gms.Location;
-using ActivityCompat = Android.Support.V4.App.ActivityCompat;
+ using Plugin.Media;
+using Plugin.CurrentActivity;
 
 namespace MiBud.Droid
 {
@@ -39,9 +40,10 @@ namespace MiBud.Droid
              Manifest.Permission.BluetoothPrivileged,
              Manifest.Permission.ReadExternalStorage,
              Manifest.Permission.WriteExternalStorage,
-             Manifest.Permission.ReadPhoneState
+             Manifest.Permission.ReadPhoneState,
+             Manifest.Permission.Camera
         };
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -53,11 +55,13 @@ namespace MiBud.Droid
             Instance = this;
 
             base.OnCreate(savedInstanceState);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             var coarseLocationPermissionGranted = ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation);
             var fineLocationPermissionGranted = ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation);
             var InternetPermissionGranted = ContextCompat.CheckSelfPermission(this, Manifest.Permission.Internet);
-            if (coarseLocationPermissionGranted == Permission.Denied || fineLocationPermissionGranted == Permission.Denied || InternetPermissionGranted == Permission.Denied)
+            var CameraPermissionGranted = ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera);
+            if (CameraPermissionGranted==Permission.Denied || coarseLocationPermissionGranted == Permission.Denied || fineLocationPermissionGranted == Permission.Denied || InternetPermissionGranted == Permission.Denied)
             {
                 ActivityCompat.RequestPermissions(this, LocationPermissions, RequestLocationId);
             }
@@ -68,10 +72,11 @@ namespace MiBud.Droid
 
             //Log.Debug(TAG, "InstanceID token: " + FirebaseInstanceId.Instance.Token);
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
-
             UserDialogs.Init(this);
             Rg.Plugins.Popup.Popup.Init(this);
+            await CrossMedia.Current.Initialize();
             Xamarin.FormsMaps.Init(this, savedInstanceState);
+            await CrossMedia.Current.Initialize();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             _receiver = new BluetoothDeviceReceiver();
@@ -155,7 +160,15 @@ namespace MiBud.Droid
             });
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        }
+
+        public   void OnRequestPermissionsResult1(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
