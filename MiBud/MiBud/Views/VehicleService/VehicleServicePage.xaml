@@ -189,11 +189,10 @@
             </ListView>
             <Grid HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" HeightRequest="65" WidthRequest="65">
                 <Frame CornerRadius="33" Padding="-3" HasShadow="True" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-
                     <ImageButton BackgroundColor="White" Command="{Binding AddNewVehicleServiceCommand}">
                         <ImageButton.Source>
                             <FontImageSource FontFamily="{DynamicResource Material}" Glyph="&#xF0417;" 
-                                             Color="{StaticResource theme_color}" Size="65" />
+                                             Color="{Binding selectedBgColor}" Size="65" />
                         </ImageButton.Source>
                     </ImageButton>
                 </Frame>

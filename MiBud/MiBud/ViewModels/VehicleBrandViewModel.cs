@@ -111,6 +111,7 @@ namespace MiBud.ViewModels
             }
         }
 
+
         #region Methods
 
         public async Task GetVehicleBrandList(int segment_id)
@@ -126,6 +127,8 @@ namespace MiBud.ViewModels
 
             if (response.status_code == System.Net.HttpStatusCode.OK || response.status_code == System.Net.HttpStatusCode.Created)
             {
+                oem_list = null;
+                oem_static_list = null;
                 oem_list = oem_static_list = new ObservableCollection<OemResult>(response.results);
             }
             else

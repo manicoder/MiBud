@@ -11,8 +11,11 @@ using MiBud.Services;
 using MiBud.StaticInfo;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace MiBud.ViewModels
 {
@@ -368,34 +371,55 @@ namespace MiBud.ViewModels
 
             TakeVahicleImageCommand = new Command(async (obj) =>
             {
-                try
-                {
+                await TakePhoto();
+                //try
+                //{
+                //    var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+                //    if (status == PermissionStatus.Granted)
+                //    {
+                //        //We have permission!
+                //        if (status != PermissionStatus.Granted || !CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                //        {
+                //            await page.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                //            return;
+                //        }
+                //        var optt = new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                //        {
+                //            //Directory = "Sample",
+                //            //Name = "profile.jpg",
+                //            PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
+                //            MaxWidthHeight = 70,
+                //            CompressionQuality = 50,
+                //        };
+                //        Device.BeginInvokeOnMainThread(async () =>
+                //        {
+                //            try
+                //            {
+                //                file = await CrossMedia.Current.TakePhotoAsync(optt);
 
-                    await CrossMedia.Current.Initialize();
+                //            }
+                //            catch (Exception ex)
+                //            {
 
-                    if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                    {
-                        await page.DisplayAlert("No Camera", ":( No camera available.", "OK");
-                        return;
-                    }
+                //            }
+                //        });
 
-                    file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-                    {
-                        Directory = "Sample",
-                        Name = "profile.jpg",
-                        PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
-                        MaxWidthHeight = 70,
-                        CompressionQuality = 50,
-                    });
+                //        if (file == null)
+                //            return;
 
-                    if (file == null)
-                        return;
+                //        vehicle_pic = ImageSource.FromFile(file.Path);
+                //    }
+                //    else
+                //    {
+                //        await page.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                //    }
+                //    //await CrossMedia.Current.Initialize();
 
-                    vehicle_pic = ImageSource.FromFile(file.Path);
-                }
-                catch (Exception ex)
-                {
-                }
+
+                //}
+                //catch (Exception ex)
+                //{
+                //}
             });
 
             SegmentSelectionCommand = new Command(async (obj) =>
@@ -458,8 +482,9 @@ namespace MiBud.ViewModels
                         await Acr.UserDialogs.UserDialogs.Instance.AlertAsync("Please select vehicle brand.", "Alert", "Ok");
                         return;
                     }
-
-                    await Rg.Plugins.Popup.Services.PopupNavigation.PushAsync(new PopupPages.ModelPopupPage(selected_brand.oem.name));
+                    List<int> objoemid = new List<int>();
+                    objoemid.Add(selected_brand.oem.id);
+                    await Rg.Plugins.Popup.Services.PopupNavigation.PushAsync(new PopupPages.ModelPopupPage(objoemid, selected_segment.id));
                 }
             });
 
@@ -560,7 +585,84 @@ namespace MiBud.ViewModels
                 }
             });
         }
+        public async Task<ImageSource> TakePhoto()
+        {
+            if (!CrossMedia.Current.IsCameraAvailable ||
+                    !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await page.DisplayAlert("No Camera", "Sorry! No camera available.", "OK");
+                return null;
+            }
 
+            var isPermissionGranted = await RequestCameraAndGalleryPermissions();
+            if (!isPermissionGranted)
+                return null;
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                Directory = "TestPhotoFolder",
+                SaveToAlbum = true,
+                CompressionQuality = 75,
+                CustomPhotoSize = 50,
+                PhotoSize = PhotoSize.Medium,
+                MaxWidthHeight = 1000,
+            });
+
+            if (file == null)
+                return null;
+
+            var imageSource = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                return stream;
+            });
+
+            return imageSource;
+        }
+        private async Task<bool> RequestCameraAndGalleryPermissions()
+        {
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+            var photosStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Photos);
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var permissionRequestResult = await CrossPermissions.Current.RequestPermissionsAsync(
+                    new Permission[] { Permission.Camera, Permission.Storage, Permission.Photos });
+
+                var cameraResult = permissionRequestResult[Plugin.Permissions.Abstractions.Permission.Camera];
+                var storageResult = permissionRequestResult[Plugin.Permissions.Abstractions.Permission.Storage];
+                var photosResult = permissionRequestResult[Plugin.Permissions.Abstractions.Permission.Photos];
+
+                return (
+                    cameraResult != PermissionStatus.Denied &&
+                    storageResult != PermissionStatus.Denied &&
+                    photosResult != PermissionStatus.Denied);
+            }
+
+            return true;
+        }
+
+        private async Task<bool> RequestPermissions(List<Permission> permissionList)
+        {
+            List<PermissionStatus> permissionStatuses = new List<PermissionStatus>();
+            foreach (var permission in permissionList)
+            {
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
+                permissionStatuses.Add(status);
+            }
+
+            var requiresRequesst = permissionStatuses.Any(x => x != PermissionStatus.Granted);
+
+            if (requiresRequesst)
+            {
+                var permissionRequestResult = await CrossPermissions.Current.RequestPermissionsAsync(permissionList.ToArray());
+
+                return permissionRequestResult.All(x => x.Value != PermissionStatus.Denied);
+            }
+
+            return true;
+        }
         public async void GetSegmentList(Vehicle vehicle)
         {
             try
@@ -650,12 +752,12 @@ namespace MiBud.ViewModels
         {
             bool IsError = false;
 
-            if (file == null)
-            {
-                await page.DisplayAlert("Alert", "Click your profile image", "Ok");
-                IsError = true;
-            }
-            else if (string.IsNullOrEmpty(vehicle_request_model.registration_id))
+            //if (file == null)
+            //{
+            //    await page.DisplayAlert("Alert", "Click your profile image", "Ok");
+            //    IsError = true;
+            //}
+            if (string.IsNullOrEmpty(vehicle_request_model.registration_id))
             {
                 await page.DisplayAlert("Alert", "Enter vehicle registration number", "Ok");
                 IsError = true;

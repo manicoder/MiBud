@@ -72,6 +72,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -106,9 +107,9 @@
                                        FontFamily="{DynamicResource Material}" 
                                        FontSize="30" 
                                        TextColor="{StaticResource theme_color}">
-                                    <Label.GestureRecognizers>
+                                    <!--<Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding ProfileCommand}"/>
-                                    </Label.GestureRecognizers>
+                                    </Label.GestureRecognizers>-->
                                 </Label>
                             </Frame>
                             <!--<ImageButton Source="ic_add" HeightRequest="40" WidthRequest="40" TranslationX="7" CornerRadius="20"
@@ -233,6 +234,32 @@
                                            Placeholder="Pin code"  
                                            Style="{StaticResource ent}"/>
                     </Frame>
+                    <Grid Grid.Row="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox IsChecked="False"   Color="{StaticResource theme_color}" Scale="1.2"/>
+                        <Label HorizontalOptions="Center" Grid.Column="1" Style="{StaticResource lbl}"  FontSize="17" 
+       VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="By clicking submit, you agree to our Standard  " />
+                                    <Span Text="Terms and conditions."
+                  TextColor="Blue"
+                  >
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenPrivacyPolicyCommand}"
+                                           />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+
+
+                    </Grid>
                 </Grid>
             </ScrollView>
             <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}" Command="{Binding SubmitCommand}"/>

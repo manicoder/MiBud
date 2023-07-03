@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 [assembly: ExportFont("MaterialIcons-Regular.ttf", Alias = "Material")]
@@ -14,10 +15,12 @@ namespace MiBud
 {
     public partial class App : Application
     {
+        public static JobcardResult selected_jobcard;
         public static bool bt_available = true;
         public static bool dongle_connected = false;
         public static string selected_vehicle_picture = string.Empty;
         public static string selectedIcon = string.Empty;
+        public static string selectedColor = string.Empty;
         public static bool is_update = true;
         public static string refresh_token = string.Empty;
         public static string access_token = string.Empty;
@@ -30,6 +33,8 @@ namespace MiBud
         public static string dongle = string.Empty;
         public static int? country_id;
         public static string selected_vehicle = string.Empty;
+        public static string selected_vehicle_Service = string.Empty;
+        public static string otpmobileno = string.Empty;
 
         public static ObservableCollection<BluetoothDevicesModel> bluetooth_devices = new ObservableCollection<BluetoothDevicesModel>();
 
@@ -37,6 +42,8 @@ namespace MiBud
         public static LoginResponse user = new LoginResponse();
         public static LoginModel login_model = new LoginModel();
 
+        public static Pin currentServiceLocation;
+        internal static WorkshopResult CurrentWorkshop;
 
         public App()
         {

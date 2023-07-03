@@ -291,6 +291,10 @@ namespace MiBud.ViewModels
         [Obsolete]
         public void InitializeCommands()
         {
+            OpenPrivacyPolicyCommand = new Command(async (obj) =>
+            {
+                GoToPrivacyPolicyPage();
+            });
 
             MessagingCenter.Subscribe<CountyViewModel, RsUserTypeCountry>(this, "selected_country_registrationVM", async (sender, arg) =>
             {
@@ -306,29 +310,55 @@ namespace MiBud.ViewModels
 
             ProfileCommand = new Command(async (obj) =>
             {
-                await CrossMedia.Current.Initialize();
 
-                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                try
                 {
-                    await page.DisplayAlert("No Camera", ":( No camera available.", "OK");
-                    return;
+                    if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                    {
+                        await page.DisplayAlert("No Camera", ":( No camera avaialble.", "OK");
+                        return;
+                    }
+
+                    var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                    {
+                        PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+                        Directory = "Sample",
+                        Name = "test.jpg"
+                    });
+
+                    if (file == null)
+                        return;
                 }
-
-                file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                catch (Exception ex)
                 {
-                    Directory = "Sample",
-                    Name = "profile.jpg",
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
-                    MaxWidthHeight = 70,
-                    CompressionQuality = 50,
-                });
 
-                if (file == null)
-                    return;
+                    throw;
+                }
+                //await CrossMedia.Current.Initialize();
 
-                //await page.DisplayAlert("File Location", file.Path, "OK");
+                //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                //{
+                //    await page.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                //    return;
+                //}
 
-                user_profile_pic = ImageSource.FromFile(file.Path);
+                //file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                //{
+                //    Directory = "Sample",
+                //    Name = "profile.jpg",
+                //    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
+                //    MaxWidthHeight = 70,
+                //    CompressionQuality = 50,
+                //});
+
+                //if (file == null)
+                //    return;
+
+                ////await page.DisplayAlert("File Location", file.Path, "OK");
+
+                //user_profile_pic = ImageSource.FromFile(file.Path);
+
+                //----
 
                 //user_profile_pic = ImageSource.FromStream(() =>
                 //{
@@ -407,6 +437,15 @@ namespace MiBud.ViewModels
             });
         }
 
+        async void GoToPrivacyPolicyPage()
+        {
+            using (UserDialogs.Instance.Loading("Loading...", null, null, true, MaskType.Black))
+            {
+                await Task.Delay(200);
+                await navigationService.PushAsync(new Views.PrivacyPolicy.PrivacyPolicyPage());
+            }
+        }
+
         public async Task UserRegistration()
         {
 
@@ -439,7 +478,7 @@ namespace MiBud.ViewModels
                         user_detail.password = password;
                         user_detail.device_type = device_type;
                         user_detail.mac_id = mac_id;
-                        user_detail.user_profile_pic = user_profile_pic;
+                        //user_detail.user_profile_pic = user_profile_pic;
                         //user_detail.pin_code = pin_code;
                         //user_detail.rs_agent_id = "WK2397950556"; //workshop_detail.code;
                         user_detail.user_type = "mibud";//"wikitekMechanik";
@@ -500,12 +539,12 @@ namespace MiBud.ViewModels
         {
             bool IsError = false;
 
-            if (file == null)
-            {
-                await page.DisplayAlert("Alert", "Click your profile image", "Ok");
-                IsError = true;
-            }
-            else if (string.IsNullOrEmpty(first_name))
+            //if (file == null)
+            //{
+            //    await page.DisplayAlert("Alert", "Click your profile image", "Ok");
+            //    IsError = true;
+            //}
+            if (string.IsNullOrEmpty(first_name))
             {
                 await page.DisplayAlert("Alert", "Please enter your first name", "Ok");
                 IsError = true;
@@ -581,6 +620,7 @@ namespace MiBud.ViewModels
         #endregion
 
         #region ICommands
+        public ICommand OpenPrivacyPolicyCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
         public ICommand CountryCommand { get; set; }
         //public ICommand RSAgentCommand { get; set; }

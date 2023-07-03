@@ -16,7 +16,7 @@ namespace MiBud.ViewModels
     {
         ApiServices apiServices;
         public event EventHandler CloseCountryPopup;
-        public VehicleModelViewModel(string oem)
+        public VehicleModelViewModel(List<int> oemlist, int SegmentId)
         {
             apiServices = new ApiServices();
             Device.InvokeOnMainThreadAsync(async () =>
@@ -24,9 +24,9 @@ namespace MiBud.ViewModels
                 IsBusy = true;
                 await Task.Delay(10);
 
-                await GetModelList(oem);
+                await GetModelList(oemlist, SegmentId);
                 IsBusy = false;
-             
+
             });
             vehicle_model_list = new ObservableCollection<VehicleModelResult>();
 
@@ -92,9 +92,13 @@ namespace MiBud.ViewModels
 
         #region Methods
 
-        public async Task GetModelList(string oem)
+        public async Task GetModelList(List<int> oemlist, int SegmentId)
         {
-            var response = await apiServices.GetVehicleModel(Preferences.Get("token", null), oem,true);
+            ModelBandModel obj = new ModelBandModel();
+            obj.segment = SegmentId;
+            obj.oems = oemlist;
+
+            var response = await apiServices.GetVehicleModel(Preferences.Get("token", null), obj, true);
 
             var api_status_code = StaticMethods.http_status_code(response.status_code);
 

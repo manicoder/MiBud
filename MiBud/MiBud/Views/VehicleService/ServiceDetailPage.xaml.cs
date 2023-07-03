@@ -19,6 +19,8 @@ namespace MiBud.Views.VehicleService
         {
             InitializeComponent();
             BindingContext = viewModel = new ServiceDetailViewModel(jobcard_detail);
+
         }
+
     }
 }

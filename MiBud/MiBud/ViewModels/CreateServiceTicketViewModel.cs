@@ -20,7 +20,19 @@ namespace MiBud.ViewModels
         public CreateServiceTicketViewModel()
         {
             apiServices = new ApiServices();
-           // GetWorkshop();
+            // GetWorkshop();
+            if (App.selectedColor == "blue")
+            {
+                selectedBgColor = Color.Blue;
+            }
+            else if (App.selectedColor == "orange")
+            {
+                selectedBgColor = (Color)Application.Current.Resources["theme_color"];
+            }
+            else if (App.selectedColor == "green")
+            {
+                selectedBgColor = Color.Green;
+            }
         }
 
         private Color _wikitek_color = (Color)Application.Current.Resources["theme_color"];
@@ -33,7 +45,16 @@ namespace MiBud.ViewModels
                 OnPropertyChanged("wikitek_color");
             }
         }
-
+        private Color _selectedBgColor;
+        public Color selectedBgColor
+        {
+            get => _selectedBgColor;
+            set
+            {
+                _selectedBgColor = value;
+                OnPropertyChanged("selectedBgColor");
+            }
+        }
         private Color _mobitek_color = (Color)Application.Current.Resources["tab_unselect_color"];
         public Color mobitek_color
         {
@@ -90,8 +111,8 @@ namespace MiBud.ViewModels
         }
 
         public async Task GetWorkshop()
-        {
-            var result = await apiServices.GetWorkshop(Xamarin.Essentials.Preferences.Get("token", null), "wikitekMechanik");
+        { 
+            var result = await apiServices.GetWorkshop(Xamarin.Essentials.Preferences.Get("token", null), App.selected_vehicle_Service);
 
             if (!result.success)
             {
@@ -112,8 +133,7 @@ namespace MiBud.ViewModels
             AllPins = new ObservableCollection<Pin>();
 
             foreach (var item in workshops)
-            {
-
+            { 
                 string gpsLat = item.gps_location?.Split(',')[0].Trim();
                 string gpsLong = item.gps_location?.Split(',')[1].Trim();
 

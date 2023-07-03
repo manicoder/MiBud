@@ -60,37 +60,52 @@ namespace MiBud.Services
                 // MediaFile _image;
 
                 // code here to assign image to _image
+                model.user_profile_pic = null;
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
 
-                var content = new MultipartFormDataContent();
+                //var content = new MultipartFormDataContent();
 
-                StringContent first_name = new StringContent(model.first_name);
-                StringContent last_name = new StringContent(model.last_name);
-                StringContent email = new StringContent(model.email);
-                StringContent mobile = new StringContent(model.mobile);
-                StringContent password = new StringContent(model.password);
-                StringContent device_type = new StringContent(model.device_type);
-                StringContent mac_id = new StringContent(model.mac_id);
-                StringContent user_type = new StringContent(model.user_type);
-                StringContent role = new StringContent(model.role);
+                //StringContent first_name = new StringContent(model.first_name);
+                //StringContent last_name = new StringContent(model.last_name);
+                //StringContent email = new StringContent(model.email);
+                //StringContent mobile = new StringContent(model.mobile);
+                //StringContent password = new StringContent(model.password);
+                //StringContent device_type = new StringContent(model.device_type);
+                //StringContent mac_id = new StringContent(model.mac_id);
+                //StringContent user_type = new StringContent(model.user_type);
+                //StringContent role = new StringContent(model.role);
+                //StringContent user_profile_pic = new StringContent(null);
                 //StringContent rs_agent_id = new StringContent(model.rs_agent_id);
 
-                content.Add(new StreamContent(file.GetStream()), "\"user_profile_pic\"", $"{file.Path}");
 
-                content.Add(first_name, "first_name");
-                content.Add(last_name, "last_name");
-                content.Add(email, "email");
-                content.Add(mobile, "mobile");
-                content.Add(password, "password");
-                content.Add(device_type, "device_type");
-                content.Add(mac_id, "mac_id");
-                content.Add(user_type, "user_type");
-                content.Add(role, "role");
+                //content.Add(new StreamContent(file.GetStream()), "\"user_profile_pic\"", $"{file.Path}");
+
+
+                //content.Add(first_name, "first_name");
+                //content.Add(last_name, "last_name");
+                //content.Add(email, "email");
+                //content.Add(mobile, "mobile");
+                //content.Add(password, "password");
+                //content.Add(device_type, "device_type");
+                //content.Add(mac_id, "mac_id");
+                //content.Add(user_type, "user_type");
+                //content.Add(role, "role");
+                //content.Add(user_profile_pic, "user_profile_pic");
+
+
+
                 //content.Add(rs_agent_id, "rsagent_id");
-
+                //foreach (var dataContent in content)
+                //{
+                //    var name = dataContent.Headers.ContentDisposition.Name;
+                //    var value = dataContent.ReadAsStringAsync().Result;
+                //}
                 //var httpClient = new System.Net.Http.HttpClient();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var url = $"{base_url}users/register/mibud";
+
                 http_response = await client.PostAsync(url, content);
 
                 var Data = http_response.Content.ReadAsStringAsync().Result;
@@ -380,8 +395,8 @@ namespace MiBud.Services
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
                     string url = $"{base_url}models/segments-oem/";
-                    http_response = await client.GetAsync(url);
-                    //http_response = await client.GetAsync($"{base_url}models/segments-oem/?segments_id={segment_id}");
+                    //http_response = await client.GetAsync(url);
+                    http_response = await client.GetAsync($"{base_url}models/segments-oem/?segments_id={segment_id}");
                     Data = http_response.Content.ReadAsStringAsync().Result;
                     Preferences.Set("OemList", Data);
                 }
@@ -400,7 +415,7 @@ namespace MiBud.Services
             }
         }
 
-        public async Task<VehicleModel> GetVehicleModel(string token, string oem_name, bool is_update)
+        public async Task<VehicleModel> GetVehicleModel(string token, ModelBandModel model, bool is_update)
         {
             HttpResponseMessage http_response = new HttpResponseMessage();
             try
@@ -409,9 +424,12 @@ namespace MiBud.Services
                 if (is_update)
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
-                    string url = $"{base_url}models/models/";
-                    http_response = await client.GetAsync(url);
+                    string url = $"{base_url}models/list/oem";
+                    //http_response = await client.GetAsync(url);
                     //http_response = await client.GetAsync($"{base_url}models/models/?oem={oem_name}");
+                    var json = JsonConvert.SerializeObject(model);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    http_response = await client.PostAsync(url, content);
                     Data = http_response.Content.ReadAsStringAsync().Result;
                     Preferences.Set("ModelList", Data);
                 }
@@ -422,7 +440,9 @@ namespace MiBud.Services
                 var vahicle_all_models_list = JsonConvert.DeserializeObject<VehicleModel>(Data);
                 vahicle_all_models_list.status_code = http_response.StatusCode;
 
-                vahicle_all_models_list.results = vahicle_all_models_list.results.Where(x => x.oem.name.Contains(oem_name)).ToList();
+                // vahicle_all_models_list.results = vahicle_all_models_list.results.Where(x => x.oem.id.Contains(oem_name)).ToList();
+
+                vahicle_all_models_list.results = vahicle_all_models_list.data.ToList();
                 return vahicle_all_models_list;//.results.FirstOrDefault(x => x.id == id);
             }
             catch (Exception ex)
@@ -437,32 +457,37 @@ namespace MiBud.Services
             HttpResponseMessage http_response = new HttpResponseMessage();
             try
             {
+                model.picture = null;
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                //http_response = await client.PostAsync($"{base_url}devices/register/device/mibud/", content);
+
                 // MediaFile _image;
 
                 // code here to assign image to _image
 
 
-                var content = new MultipartFormDataContent();
+                //var content = new MultipartFormDataContent();
 
-                StringContent registration_id = new StringContent(model.registration_id);
-                StringContent vin = new StringContent(model.vin);
-                StringContent segment = new StringContent($"{model.segment}");
-                StringContent vehicle_model = new StringContent($"{model.vehicle_model}");
-                StringContent sub_model = new StringContent($"{model.sub_model}");
-                StringContent model_year = new StringContent($"{model.model_year}");
-                StringContent user = new StringContent($"{model.user}");
-                StringContent oem = new StringContent($"{model.oem}");
+                //StringContent registration_id = new StringContent(model.registration_id);
+                //StringContent vin = new StringContent(model.vin);
+                //StringContent segment = new StringContent($"{model.segment}");
+                //StringContent vehicle_model = new StringContent($"{model.vehicle_model}");
+                //StringContent sub_model = new StringContent($"{model.sub_model}");
+                //StringContent model_year = new StringContent($"{model.model_year}");
+                //StringContent user = new StringContent($"{model.user}");
+                //StringContent oem = new StringContent($"{model.oem}");
 
-                content.Add(new StreamContent(file.GetStream()), "\"picture\"", $"{file.Path}");
+                //content.Add(new StreamContent(file.GetStream()), "\"picture\"", $"{file.Path}");
 
-                content.Add(registration_id, "registration_id");
-                content.Add(vin, "vin");
-                content.Add(segment, "segment");
-                content.Add(vehicle_model, "vehicle_model");
-                content.Add(sub_model, "sub_model");
-                content.Add(model_year, "model_year");
-                content.Add(user, "user");
-                content.Add(oem, "oem");
+                //content.Add(registration_id, "registration_id");
+                //content.Add(vin, "vin");
+                //content.Add(segment, "segment");
+                //content.Add(vehicle_model, "vehicle_model");
+                //content.Add(sub_model, "sub_model");
+                //content.Add(model_year, "model_year");
+                //content.Add(user, "user");
+                //content.Add(oem, "oem");
 
                 //var httpClient = new System.Net.Http.HttpClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
@@ -486,32 +511,36 @@ namespace MiBud.Services
             HttpResponseMessage http_response = new HttpResponseMessage();
             try
             {
+
+                model.picture = null;
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
                 // MediaFile _image;
 
                 // code here to assign image to _image
 
 
-                var content = new MultipartFormDataContent();
+                //var content = new MultipartFormDataContent();
 
-                StringContent registration_id = new StringContent(model.registration_id);
-                StringContent vin = new StringContent(model.vin);
-                StringContent segment = new StringContent($"{model.segment}");
-                StringContent vehicle_model = new StringContent($"{model.vehicle_model}");
-                StringContent sub_model = new StringContent($"{model.sub_model}");
-                StringContent model_year = new StringContent($"{model.model_year}");
-                StringContent user = new StringContent($"{model.user}");
-                StringContent oem = new StringContent($"{model.oem}");
+                //StringContent registration_id = new StringContent(model.registration_id);
+                //StringContent vin = new StringContent(model.vin);
+                //StringContent segment = new StringContent($"{model.segment}");
+                //StringContent vehicle_model = new StringContent($"{model.vehicle_model}");
+                //StringContent sub_model = new StringContent($"{model.sub_model}");
+                //StringContent model_year = new StringContent($"{model.model_year}");
+                //StringContent user = new StringContent($"{model.user}");
+                //StringContent oem = new StringContent($"{model.oem}");
 
-                content.Add(new StreamContent(file.GetStream()), "\"picture\"", $"{file.Path}");
+                //content.Add(new StreamContent(file.GetStream()), "\"picture\"", $"{file.Path}");
 
-                content.Add(registration_id, "registration_id");
-                content.Add(vin, "vin");
-                content.Add(segment, "segment");
-                content.Add(vehicle_model, "vehicle_model");
-                content.Add(sub_model, "sub_model");
-                content.Add(model_year, "model_year");
-                content.Add(user, "user");
-                content.Add(oem, "oem");
+                //content.Add(registration_id, "registration_id");
+                //content.Add(vin, "vin");
+                //content.Add(segment, "segment");
+                //content.Add(vehicle_model, "vehicle_model");
+                //content.Add(sub_model, "sub_model");
+                //content.Add(model_year, "model_year");
+                //content.Add(user, "user");
+                //content.Add(oem, "oem");
 
                 //var httpClient = new System.Net.Http.HttpClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
@@ -612,6 +641,92 @@ namespace MiBud.Services
                 return null;
             }
         }
+
+        public async Task<ErroMsg> ApproveTransport(ApproveModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/approved-transport/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+        public async Task<ErroMsg> ClosedByCustomer(ApproveModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/closedby-customer/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+        public async Task<ErroMsg> RejectedTransport(RejectModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/rejected-transport/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+        public async Task<ErroMsg> ClosedDisapproved(RejectModel model, string token)
+        {
+            HttpResponseMessage http_response = new HttpResponseMessage();
+            try
+            {
+                ////client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);
+                var json = JsonConvert.SerializeObject(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                http_response = await client.PostAsync($"{base_url}analyze/closed-disapproved/", content);
+                var Data = http_response.Content.ReadAsStringAsync().Result;
+                var results = JsonConvert.DeserializeObject<ErroMsg>(Data);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                //Application.Current.MainPage.DisplayAlert("Alert", ex.StackTrace, "Ok");
+                return null;
+            }
+        }
+
+
 
         public async Task<VehicleModel> PickupApproved(string token, string jobcard_id)
         {
@@ -1020,7 +1135,8 @@ namespace MiBud.Services
             HttpResponseMessage http_response = new HttpResponseMessage();
             JobcardModel model = new JobcardModel();
             string Data = string.Empty;
-            string url = base_url + $"analyze/jobcard-details/?registration_id=" + App.selected_vehicle;
+            string url = base_url + $"analyze/jobcard-details/?registration_id=" + App.selected_vehicle
+                + "&user_type=" + App.selected_vehicle_Service;
             try
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("JWT", token);

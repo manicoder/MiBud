@@ -19,11 +19,15 @@ namespace MiBud.Views.Home
         {
             try
             {
-
                 InitializeComponent();
                 BindingContext = viewModel = new HomeViewModel(this, vehicle);
                 selected_vehicle_picture = App.selected_vehicle_picture;
-                img_toolbaritem.IconImageSource = "blue.png";
+                //img_toolbaritem.IconImageSource = "blue.png";
+                App.selectedIcon = string.Empty;
+                App.selected_vehicle_Service = string.Empty;
+                App.currentServiceLocation = null;
+                App.CurrentWorkshop = null;
+                App.selectedColor = string.Empty;
             }
             catch (System.Exception ex)
             {
@@ -44,6 +48,8 @@ namespace MiBud.Views.Home
         {
             if (selected_page == "wikitek")
             {
+
+
                 this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
             }
             else if (selected_page == "mobitek")
@@ -77,24 +83,33 @@ namespace MiBud.Views.Home
                         viewModel.wikitek_color = (Color)Application.Current.Resources["theme_color"];
                         img_wikitek.Scale = 1.4;
                         selected_page = "wikitek";
-                        img_toolbaritem.IconImageSource = "blue.png";
+                        //img_toolbaritem.IconImageSource = "blue.png";
                         App.selectedIcon = "wikitek";
+                        App.selected_vehicle_Service = "wikitekMechanik";
+                        App.selectedColor = "blue";
+                        ChangeStatusColor(Color.Blue);
                         break;
 
                     case "mobitek":
                         viewModel.mobitek_color = (Color)Application.Current.Resources["theme_color"];
                         img_mobitek.Scale = 1.4;
                         selected_page = "mobitek";
-                        img_toolbaritem.IconImageSource = "orange.png";
+                        //img_toolbaritem.IconImageSource = "orange.png";
                         App.selectedIcon = "mobitek";
+                        App.selected_vehicle_Service = "mobitekMechanik";
+                        App.selectedColor = "orange";
+                        ChangeStatusColor((Color)Application.Current.Resources["theme_color"]);
                         break;
 
                     case "rsangel":
                         viewModel.rsangel_color = (Color)Application.Current.Resources["theme_color"];
                         img_rsangel.Scale = 1.4;
                         selected_page = "rsangel";
-                        img_toolbaritem.IconImageSource = "green.png";
+                        //img_toolbaritem.IconImageSource = "green.png";
                         App.selectedIcon = "rsangel";
+                        App.selected_vehicle_Service = "RSAngelMechanik";
+                        App.selectedColor = "green";
+                        ChangeStatusColor(Color.Green);
                         break;
 
                 }
@@ -102,6 +117,16 @@ namespace MiBud.Views.Home
             catch (Exception ex)
             {
             }
+        }
+
+        private static void ChangeStatusColor(Color color)
+        {
+            var statusbar = DependencyService.Get<IStatusBarPlatformSpecific>();
+            statusbar.SetStatusBarColor(color);
+
+            var mdPage = Application.Current.MainPage as MasterDetailPage;
+            var navPage = mdPage.Detail as NavigationPage;
+            navPage.BarBackgroundColor = color;
         }
     }
 }

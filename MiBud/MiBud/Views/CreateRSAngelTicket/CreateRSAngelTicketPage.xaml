@@ -30,11 +30,11 @@
                                 <OnIdiom x:TypeArguments="GridLength" Tablet="140" Phone="140"/>
                             </RowDefinition.Height>
                         </RowDefinition>
-                        <!--<RowDefinition>
+                        <RowDefinition>
                             <RowDefinition.Height>
                                 <OnIdiom x:TypeArguments="GridLength" Tablet="250" Phone="180"/>
                             </RowDefinition.Height>
-                        </RowDefinition>-->
+                        </RowDefinition>
                         <RowDefinition>
                             <RowDefinition.Height>
                                 <OnIdiom x:TypeArguments="GridLength" Tablet="35" Phone="40"/>
@@ -74,7 +74,7 @@
                                 </ColumnDefinition.Width>
                             </ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="ic_user.png"/>
+                        <Image Grid.Column="0" Source="green.png"/>
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -91,7 +91,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" x:Name="txt_workshop_mo_no" Text="0000000000" Style="{StaticResource lbl}"/>
                                 <Label Grid.Column="1" Text="&#xF03F6;" FontFamily="{DynamicResource Material}" 
-                                       TextColor="{StaticResource theme_color}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                       TextColor="{Binding selectedBgColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                                     <Label.FontSize>
                                         <OnIdiom x:TypeArguments="x:Double" Tablet="40" Phone="40"/>
                                     </Label.FontSize>
@@ -99,8 +99,8 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    <!--<maps:Map Grid.Row="1" x:Name="map" />-->
-                    <Grid Grid.Row="1">
+                    <maps:Map Grid.Row="1" x:Name="map" />
+                    <!--<Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
@@ -108,7 +108,7 @@
                         <CheckBox IsChecked="False" Color="{StaticResource theme_color}" Scale="1.2"/>
                         <Label Grid.Column="1" Text="Immediate" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="Center"/>
-                    </Grid>
+                    </Grid>-->
                     <Grid Grid.Row="2" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -127,15 +127,15 @@
                                         </ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Label  Style="{StaticResource lbl}" TextColor="{StaticResource placeholder_color}" />
-                                    <BoxView Grid.Column="1" x:Name="img_line_ds" BackgroundColor="{StaticResource theme_color}"/>
-                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                    <BoxView Grid.Column="1" x:Name="img_line_ds" BackgroundColor="{Binding selectedBgColor}"/>
+                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{Binding selectedBgColor}"
                                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                                         <Label.FontSize>
                                             <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
                                         </Label.FontSize>
                                     </Label>
                                 </Grid>
-                                <local:CustomDatePicker TextColor="{StaticResource text_color}" FontSize="{StaticResource font_size}"/>
+                                <local:CustomDatePicker TextColor="{Binding selectedBgColor}" FontSize="{StaticResource font_size}"/>
                             </Grid>
                         </Frame>
                         <Frame Grid.Column="1" Style="{StaticResource frame}">
@@ -150,23 +150,23 @@
                                             </ColumnDefinition.Width>
                                         </ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Label  Style="{StaticResource lbl}" TextColor="{StaticResource placeholder_color}" />
-                                    <BoxView Grid.Column="1" x:Name="img_line_de" BackgroundColor="{StaticResource theme_color}"/>
-                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{StaticResource theme_color}"
+                                    <Label  Style="{StaticResource lbl}" TextColor="{Binding selectedBgColor}" />
+                                    <BoxView Grid.Column="1" x:Name="img_line_de" BackgroundColor="{Binding selectedBgColor}"/>
+                                    <Label Grid.Column="2" Text="&#xF035D;" FontFamily="{DynamicResource Material}" TextColor="{Binding selectedBgColor}"
                                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                                         <Label.FontSize>
                                             <OnIdiom x:TypeArguments="x:Double" Tablet="50" Phone="40"/>
                                         </Label.FontSize>
                                     </Label>
                                 </Grid>
-                                <local:CustomTimePicker TextColor="{StaticResource text_color}" FontSize="{StaticResource font_size}"/>
+                                <local:CustomTimePicker TextColor="{Binding selectedBgColor}" FontSize="{StaticResource font_size}"/>
                             </Grid>
                         </Frame>
                     </Grid>
 
-                    <Label Grid.Row="3" Text="Add Symptoms" Style="{StaticResource lbl}" 
+                    <!--<Label Grid.Row="4" Text="Add Symptoms" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                    <CollectionView Grid.Row="4" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
+                    <CollectionView Grid.Row="5" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding symotomps_list_height}" >
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
@@ -224,7 +224,7 @@
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                        --><!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
                                                TextColor="Red" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
                                             <Label.FontSize>
                                                 <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
@@ -242,7 +242,7 @@
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
                                             </Label.GestureRecognizers>
-                                        </Label>-->
+                                        </Label>--><!--
                                         
                                         <ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
                                                  Clicked="create_new_symptoms_clicked" IsVisible="{Binding add_btn_visible}"/>
@@ -264,9 +264,9 @@
                         </CollectionView.EmptyView>
                     </CollectionView>
 
-                    <Label Grid.Row="5" Text="Add Services" Style="{StaticResource lbl}" 
+                    <Label Grid.Row="6" Text="Add Services" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                    <CollectionView Grid.Row="6" ItemsSource="{Binding services_list}" ItemSizingStrategy="MeasureAllItems"
+                    <CollectionView Grid.Row="7" ItemsSource="{Binding services_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding services_list_height}" >
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
@@ -314,7 +314,7 @@
                                             </Grid>
                                         </Frame>
 
-                                        <!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
+                                        --><!--<Label Grid.Column="1" Text="&#xF0417;" FontFamily="{DynamicResource Material}" 
                                                TextColor="{StaticResource theme_color}" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
                                             <Label.FontSize>
                                                 <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
@@ -342,7 +342,7 @@
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
                                             </Label.GestureRecognizers>
-                                        </Label>-->
+                                        </Label>--><!--
 
 
                                         <ImageButton Grid.Column="1" Source="ic_add"  BackgroundColor="#fff" CornerRadius="25"
@@ -363,10 +363,10 @@
                                HorizontalTextAlignment="Center" />
                             </Grid>
                         </CollectionView.EmptyView>
-                    </CollectionView>
+                    </CollectionView>-->
                 </Grid>
             </ScrollView>
-            <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}"/>
+            <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}" BackgroundColor="{Binding selectedBgColor}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

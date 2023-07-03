@@ -28,11 +28,11 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="140"/>
 
-                            <!--<RowDefinition>
+                            <RowDefinition>
                                 <RowDefinition.Height>
                                     <OnIdiom x:TypeArguments="GridLength" Tablet="250" Phone="180"/>
                                 </RowDefinition.Height>
-                            </RowDefinition>-->
+                            </RowDefinition>
                             <RowDefinition>
                                 <RowDefinition.Height>
                                     <OnIdiom x:TypeArguments="GridLength" Tablet="55" Phone="45"/>
@@ -72,8 +72,31 @@
                                     </ColumnDefinition.Width>
                                 </ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="ic_user.png"/>
+                            <Image Grid.Column="0" Source="blue.png"/>
                             <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" x:Name="txt_workshop_id" Text="Workshop Id" Style="{StaticResource lbl}"/>
+                                <Label Grid.Row="1" x:Name="txt_workshop_name" Text="Workshop Name" Style="{StaticResource lbl}"/>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="35"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" x:Name="txt_workshop_mo_no" Text="0000000000" Style="{StaticResource lbl}"/>
+                                    <Label Grid.Column="1" Text="&#xF03F6;" FontFamily="{DynamicResource Material}" 
+                                       TextColor="{Binding selectedBgColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                        <Label.FontSize>
+                                            <OnIdiom x:TypeArguments="x:Double" Tablet="40" Phone="40"/>
+                                        </Label.FontSize>
+                                    </Label>
+                                </Grid>
+                            </Grid>
+                            <!--<Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -91,7 +114,7 @@
                                     </Label.FormattedText>
                                 </Label>
                                 <Label Grid.Row="3" Text="{Binding workshop.user.mobile}" Style="{StaticResource lbl}"/>
-                            </Grid>
+                            </Grid>-->
                         </Grid>
                         <!--<Grid Grid.Row="1" ColumnSpacing="20" Padding="0,10,0,10">
                         <Grid.ColumnDefinitions>
@@ -105,7 +128,7 @@
                         </Frame>
                         <Label Grid.Column="2" Text="Walk-in" Style="{StaticResource lbl}" HorizontalTextAlignment="Center"/>
                     </Grid>-->
-                        <!--<maps:Map Grid.Row="1" x:Name="map" />-->
+                        <maps:Map Grid.Row="1" x:Name="map" />
                         <!--<Grid Grid.Row="5" ColumnSpacing="20" Padding="0,10,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -118,7 +141,7 @@
                         </Frame>
                         <Label Grid.Column="2" Text="Repair" Style="{StaticResource lbl}" HorizontalTextAlignment="Center"/>
                     </Grid>-->
-                        <Grid Grid.Row="1" ColumnSpacing="5" Padding="0,0,0,0">
+                        <Grid Grid.Row="2" ColumnSpacing="5" Padding="0,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -127,7 +150,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <CheckBox Grid.Column="0" 
                                       x:Name="check_pickup"
                                       IsChecked="{Binding pickup_check,Mode=TwoWay}"
@@ -139,7 +162,7 @@
                             <Button Grid.Column="2"
                                     Text="Add Address"
                                     TextColor="{StaticResource btn_text_color}"
-                                    BackgroundColor="{StaticResource theme_color}"
+                                    BackgroundColor="{Binding selectedBgColor}"
                                     Clicked="AddPickupAddressClicked">
                                 <Button.Triggers>
                                     <DataTrigger TargetType="Button"
@@ -162,7 +185,7 @@
                             <Button Grid.Column="5"
                                     Text="Add Address"
                                     TextColor="{StaticResource btn_text_color}"
-                                    BackgroundColor="{StaticResource theme_color}"
+                                    BackgroundColor="{Binding selectedBgColor}"
                                     Clicked="AddDropAddressClicked">
                                 <Button.Triggers>
                                     <DataTrigger TargetType="Button"
@@ -175,7 +198,7 @@
                                 </Button.Triggers>
                             </Button>
                         </Grid>
-                        <Grid Grid.Row="2">
+                        <Grid Grid.Row="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -189,9 +212,9 @@
                                    Style="{StaticResource lbl}"
                                    IsVisible="False"/>
                         </Grid>
-                        <Label Grid.Row="3" Text="Service Type" Style="{StaticResource lbl}" 
+                        <Label Grid.Row="4" Text="Service Type" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                        <Frame Grid.Row="4" Style="{StaticResource frame}" Padding="2">
+                        <Frame Grid.Row="5" Style="{StaticResource frame}" Padding="2">
                             <Grid ColumnSpacing="0" Padding="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -204,7 +227,7 @@
                                                    IsReadOnly="True"
                                                    InputTransparent="True"/>
                                 <BoxView Grid.Column="1" 
-                                     BackgroundColor="{StaticResource theme_color}"
+                                     BackgroundColor="{Binding selectedBgColor}"
                                      Margin="0,-2,0,-2"/>
                                 <ImageButton Grid.Column="2" 
                                          InputTransparent="True"
@@ -214,7 +237,7 @@
                                     <ImageButton.Source>
                                         <FontImageSource FontFamily="{DynamicResource Material}" 
                                                      Glyph="&#xF035D;" 
-                                                     Color="{StaticResource theme_color}" />
+                                                     Color="{Binding selectedBgColor}" />
                                     </ImageButton.Source>
                                 </ImageButton>
                                 <Grid.GestureRecognizers>
@@ -222,12 +245,12 @@
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </Frame>
-                        <Label Grid.Row="5" Text="Add Symptoms" Style="{StaticResource lbl}" 
+                        <Label Grid.Row="6" Text="Add Symptoms" Style="{StaticResource lbl}" 
                            FontSize="17" VerticalTextAlignment="End"/>
-                        <CollectionView Grid.Row="6" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
+                        <CollectionView Grid.Row="7" ItemsSource="{Binding symotomps_list}" ItemSizingStrategy="MeasureAllItems"
                                     HeightRequest="{Binding symotomps_list_height}" >
                             <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -295,7 +318,8 @@
                                             <Label Grid.Column="1" Text="&#xF0133;" FontFamily="{DynamicResource Material}" 
                                                TextColor="Green" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
                                                 <Label.FontSize>
-                                                    <OnIdiom x:TypeArguments="x:Double" Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
+                                                    <OnIdiom x:TypeArguments="x:Double"
+                                                             Tablet="{StaticResource control_height_on_tablet}" Phone="{StaticResource control_height_on_phone}"/>
                                                 </Label.FontSize>
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer Command="{Binding NewRSAgentCommand}"/>
@@ -325,7 +349,7 @@
                     </Grid>
                 </ScrollView>
                 <Button Grid.Row="1" Text="Submit" Style="{StaticResource btn}"
-                        Clicked="Submit_Clicked"/>
+                        Clicked="Submit_Clicked" BackgroundColor="{Binding selectedBgColor}"/>
             </Grid>
 
             <Grid IsVisible="{Binding show_service_view}">

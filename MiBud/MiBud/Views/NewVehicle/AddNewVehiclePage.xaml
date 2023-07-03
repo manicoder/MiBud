@@ -72,12 +72,12 @@
                                    TranslationX="7" HorizontalOptions="EndAndExpand" 
                                    VerticalOptions="EndAndExpand">
 
-                                <ImageButton BackgroundColor="White"
+                                <!--<ImageButton BackgroundColor="White"
                                              Command="{Binding TakeVahicleImageCommand}">
                                     <ImageButton.Source>
                                         <FontImageSource FontFamily="{DynamicResource Material}" Glyph="&#xF0417;" Color="{StaticResource theme_color}" Size="40" />
                                     </ImageButton.Source>
-                                </ImageButton>
+                                </ImageButton>-->
                                 <!--<Label Text="&#xF0417;" FontFamily="{DynamicResource Material}" FontSize="40" TextColor="{StaticResource theme_color}" >
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding TakeVahicleImageCommand}"/>

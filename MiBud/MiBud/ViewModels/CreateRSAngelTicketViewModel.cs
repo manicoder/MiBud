@@ -101,8 +101,29 @@ namespace MiBud.ViewModels
             //        vehicle = "vehicle_6"
             //    },
             //};
+            if (App.selectedColor == "blue")
+            {
+                selectedBgColor = Color.Blue;
+            }
+            else if (App.selectedColor == "orange")
+            {
+                selectedBgColor = (Color)Application.Current.Resources["theme_color"];
+            }
+            else if (App.selectedColor == "green")
+            {
+                selectedBgColor = Color.Green;
+            }
         }
-
+        private Color _selectedBgColor;
+        public Color selectedBgColor
+        {
+            get => _selectedBgColor;
+            set
+            {
+                _selectedBgColor = value;
+                OnPropertyChanged("selectedBgColor");
+            }
+        }
         private ObservableCollection<CreateWikitekTicketModel> _symotomps_list;
         public ObservableCollection<CreateWikitekTicketModel> symotomps_list
         {

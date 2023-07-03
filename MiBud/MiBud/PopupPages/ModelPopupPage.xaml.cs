@@ -16,10 +16,10 @@ namespace MiBud.PopupPages
     public partial class ModelPopupPage : PopupPage
     {
         VehicleModelViewModel viewModel;
-        public ModelPopupPage(string oem)
+        public ModelPopupPage(List<int> oemlist,int segmentId)
         {
             InitializeComponent();
-            BindingContext = viewModel = new VehicleModelViewModel(oem);
+            BindingContext = viewModel = new VehicleModelViewModel(oemlist, segmentId);
         }
 
         protected override void OnBindingContextChanged()

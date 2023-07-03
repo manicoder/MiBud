@@ -27,6 +27,19 @@ namespace MiBud.ViewModels
                 GetJobcardList();
                 //this.navigationService = page.Navigation;
                 this.selected_vehicle = selected_vehicle;
+
+                if (App.selectedColor == "blue")
+                {
+                    selectedBgColor = Color.Blue;
+                }
+                else if (App.selectedColor == "orange")
+                {
+                    selectedBgColor = (Color)Application.Current.Resources["theme_color"];
+                }
+                else if (App.selectedColor == "green")
+                {
+                    selectedBgColor = Color.Green;
+                }
                 //InitializeCommands();
                 //vehicle_service_list = new ObservableCollection<VehicleServiceModel>
                 //{
@@ -70,6 +83,19 @@ namespace MiBud.ViewModels
         }
 
         #region Properties
+
+        private Color _selectedBgColor;
+        public Color selectedBgColor
+        {
+            get => _selectedBgColor;
+            set
+            {
+                _selectedBgColor = value;
+                OnPropertyChanged("selectedBgColor");
+            }
+        }
+
+
         private ObservableCollection<JobcardResult> _jobcard_list;
         public ObservableCollection<JobcardResult> jobcard_list
         {
@@ -130,14 +156,15 @@ namespace MiBud.ViewModels
 
             try
             {
-                selected_jobcard = (JobcardResult)obj;
-                await page.Navigation.PushAsync(new Views.VehicleService.ServiceDetailPage(selected_jobcard));
+                App.selected_jobcard = (JobcardResult)obj;
+                //await page.Navigation.PushAsync(new Views.VehicleService.ServiceDetailPage(selected_jobcard));
+                await page.Navigation.PushAsync(new Views.RSManagerSection.RSManagerSection());
             }
             catch (Exception ex)
             {
             }
         });
-        
+
         public ICommand AddNewVehicleServiceCommand => new Command(async (obj) =>
         {
             await page.Navigation.PushAsync(new Views.CreateServiceTicket.CreateServiceTicketPage(selected_vehicle));

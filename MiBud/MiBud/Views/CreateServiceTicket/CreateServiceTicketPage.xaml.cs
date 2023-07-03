@@ -3,6 +3,7 @@ using MiBud.ViewModels;
 using MiBud.Views.CreateMobitekTicket;
 using MiBud.Views.CreateRSAngelTicket;
 using MiBud.Views.CreateWikitekTicket;
+using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +22,15 @@ namespace MiBud.Views.CreateServiceTicket
     {
         CreateServiceTicketViewModel viewModel;
         Vehicle selected_vehicle;
-        string selected_page = "wikitek";
+        string selected_page = App.selectedIcon;
         public CreateServiceTicketPage(Vehicle selected_vehicle)
         {
-            InitializeComponent();
+            InitializeComponent(); activityGrid.IsVisible = false;
             BindingContext = viewModel = new CreateServiceTicketViewModel();
             this.selected_vehicle = selected_vehicle;
             //img_toolbaritem.IconImageSource = "blue.png";
 
-            Position position = new Position(22.6949509, 75.8894909);
+            //Position position = new Position(22.6949509, 75.8894909);
             //Pin pin = new Pin
             //{
             //    Label = "Santa Cruz",
@@ -39,53 +40,52 @@ namespace MiBud.Views.CreateServiceTicket
             //};
             //map.Pins.Add(pin);
 
-            Device.StartTimer(new TimeSpan(0, 0, 10), () =>
+            Device.StartTimer(new TimeSpan(0, 0, 20), () =>
             {
- 
+
                 // do something every 60 seconds
-                Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    GetWorkshops();
+                    await GetWorkshops();
                 });
                 return true; // runs again, or false to stop
             });
-
-
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await GetWorkshops();
-        }
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
+            var currentPostion = new Position(position.Latitude, position.Longitude);
+            MapSpan mapSpan = MapSpan.FromCenterAndRadius(currentPostion, Distance.FromKilometers(10));
+            map.MoveToRegion(mapSpan);
 
+
+            activityGrid.IsVisible = true;
+            indicator.IsVisible = true;
+            indicator.IsRunning = true;
+            await Task.Delay(10);
+            await GetWorkshops();
+            activityGrid.IsVisible = false;
+            indicator.IsVisible = false;
+            indicator.IsRunning = false;
+        }
         private async Task GetWorkshops()
         {
             await viewModel.GetWorkshop();
-           
-            foreach (var item in viewModel.AllPins)
+
+            foreach (var pin in viewModel.AllPins)
             {
-                map.Pins.Add(item);
+                map.Pins.Add(pin);
+                pin.Clicked += delegate
+                {
+                    var indx = map.Pins.IndexOf(pin);
+                    App.CurrentWorkshop = viewModel.workshops[indx];
+                    App.currentServiceLocation = pin;
+                };
             }
-            MapSpan mapSpan = MapSpan.FromCenterAndRadius(viewModel.AllPins.FirstOrDefault().Position, Distance.FromKilometers(10));
-            map.MoveToRegion(mapSpan);
- 
-            pin.Clicked += delegate
-            {
-                if (App.selectedIcon == "wikitek")
-                {
-                    this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
-                }
-                else if (App.selectedIcon == "mobitek")
-                {
-                    this.Navigation.PushAsync(new CreateMobitekTicketPage(selected_vehicle));
-                }
-                else if (App.selectedIcon == "rsangel")
-                {
-                    this.Navigation.PushAsync(new CreateRSAngelTicketPage(selected_vehicle));
-                }
-            }; 
-            //map.Pins.Add(pin);
-         }
+
+        }
 
 
 
@@ -105,7 +105,7 @@ namespace MiBud.Views.CreateServiceTicket
         //        img_mobitek.Scale = 1;
         //        img_rsangel.Scale = 1;
 
-         private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (selected_page == "wikitek")
             {
@@ -126,7 +126,36 @@ namespace MiBud.Views.CreateServiceTicket
         {
 
         }
- 
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            //nearest
+            App.CurrentWorkshop = viewModel.workshops?.FirstOrDefault();
+            App.currentServiceLocation = viewModel.AllPins?.FirstOrDefault();
+            GoToMethod();
+        }
+
+        private void GoToMethod()
+        {
+            if (App.selectedIcon == "wikitek")
+            {
+                this.Navigation.PushAsync(new CreateWikitekTicketPage(selected_vehicle, viewModel.selected_workshops));
+            }
+            else if (App.selectedIcon == "mobitek")
+            {
+                this.Navigation.PushAsync(new CreateMobitekTicketPage(selected_vehicle));
+            }
+            else if (App.selectedIcon == "rsangel")
+            {
+                this.Navigation.PushAsync(new CreateRSAngelTicketPage(selected_vehicle));
+            }
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            GoToMethod();
+        }
+
         //        switch (GirdClassId)
         //        {
         //            case "wikitek":
@@ -173,6 +202,6 @@ namespace MiBud.Views.CreateServiceTicket
         //    }
         //    //this.Navigation.PushAsync(new CreateRSAngelTicketPage());
         //}
- 
+
     }
 }
